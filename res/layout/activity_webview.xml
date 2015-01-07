@@ -1,0 +1,66 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WebViewActivity" >
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#74d1de"
+        android:gravity="center"
+        android:paddingLeft="10dp" >
+
+        <Button
+            android:id="@+id/iv_return"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:background="@drawable/return_icons" />
+
+        <TextView
+            android:id="@+id/textTile"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:background="@null"
+            android:text="@string/app_name" />
+
+        <Button
+            android:id="@+id/bt_more"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
+            android:visibility="invisible" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#6c7cf3"
+        android:orientation="horizontal"
+        android:layout_below="@id/header" >
+
+        <WebView
+            android:id="@+id/webview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <ProgressBar
+            android:id="@+id/pb"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:indeterminateOnly="false"
+            android:max="100"
+            android:progressDrawable="@drawable/progress_bar_states" />
+    </RelativeLayout>
+
+</RelativeLayout>
