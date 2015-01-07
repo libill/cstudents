@@ -10,6 +10,7 @@ dist
 build
 eggs
 parts
+gen
 bin
 var
 sdist
