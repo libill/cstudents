@@ -13,22 +13,41 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.TextView;
 
 import com.example.mall.R;
 
-public class WebViewActivity extends Activity {
+public class WebViewActivity extends Activity implements OnClickListener{
 	private WebView mWebView;
 	private Button iv_return;
+	private static TextView tv_tile;
 	private static ProgressBar loadProgressBar;
+	private RadioButton radio_button0;
+	private RadioButton radio_button1;
 
-	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_webview);
+		initView();
+		initData();
+	}
+	
+	private void initView(){
 		mWebView = (WebView) findViewById(R.id.webview);
 		loadProgressBar = (ProgressBar) findViewById(R.id.pb);
-
+		tv_tile = (TextView) findViewById(R.id.tv_tile);
+		radio_button0 = (RadioButton) findViewById(R.id.radio_button0);
+		radio_button1 = (RadioButton) findViewById(R.id.radio_button1);
+		radio_button0.setOnClickListener(this);
+		radio_button1.setOnClickListener(this);
+		
+		iv_return = (Button) findViewById(R.id.iv_return);
+		iv_return.setOnClickListener(this);
+		
+		
+		// webview 初始化设置
 		mWebView.getSettings().setJavaScriptEnabled(true);
 		mWebView.setWebViewClient(new SampleWebViewClient());
 		mWebView.getSettings().setLoadWithOverviewMode(true);
@@ -41,14 +60,16 @@ public class WebViewActivity extends Activity {
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
-				// Log.i("ontouch", "12313131");
 				return false;
 			}
 
 		});
 
 		mWebView.setWebChromeClient(new MyWebChromeClient());
-
+	}
+	
+	private void initData(){
+		// webview 加载页面
 		Bundle bundle = getIntent().getExtras();
 		String click_url = null;
 		if (bundle != null) {
@@ -56,11 +77,10 @@ public class WebViewActivity extends Activity {
 		}
 
 		if (click_url == null || click_url.equalsIgnoreCase("")) {
-			click_url = "http://www.baidu.com";
+			click_url = "http://www.cnblogs.com/liqw";
 		}
-		mWebView.loadUrl("file:///android_asset/html/index.html");
-		// mWebView.loadUrl(click_url);
-		goToReturn();
+//		mWebView.loadUrl("file:///android_asset/html/index.html");
+		mWebView.loadUrl(click_url);
 	}
 
 	private static class SampleWebViewClient extends WebViewClient {
@@ -74,7 +94,9 @@ public class WebViewActivity extends Activity {
 	private static class MyWebChromeClient extends WebChromeClient {
 		@Override
 		public void onProgressChanged(WebView view, int newProgress) {
+			
 			loadProgressBar.setProgress(newProgress);
+			
 			if (newProgress == 100) {
 
 				// 视觉上让手机用户看到加载完毕，进度条到100后再消失
@@ -98,6 +120,21 @@ public class WebViewActivity extends Activity {
 
 			Log.i("rrr", newProgress + "");
 		}
+		
+		@Override
+		public void onReceivedTitle(WebView view, String title) {
+			super.onReceivedTitle(view, title);
+			setWebViewTitle(title);
+		}
+		
+	}
+	
+	private static void setWebViewTitle(String title){
+		if (title.length() > 16) {
+			title = title.substring(0, 16)+"..";
+		}
+		
+		tv_tile.setText(title);
 	}
 
 	/**
@@ -113,27 +150,27 @@ public class WebViewActivity extends Activity {
 		}
 	}
 
-	public void goToReturn() {
-		iv_return = (Button) findViewById(R.id.iv_return);
-		iv_return.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				// // TODO Auto-generated method stub
-				// Intent intent2 = null;
-				// if (Constants.recommend.equals(tag)){
-				// intent2= new Intent(WebViewActivity.this,
-				// TabHostActivity.class);
-				// } else {
-				// intent2= new Intent(WebViewActivity.this,
-				// TabHostActivity.class);
-				// }
-				//
-				// startActivity(intent2);
-				finish();
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.radio_button0:
+			if(mWebView.canGoBack()){
+				mWebView.goBack();
 			}
+			break;
+		case R.id.radio_button1:
+			if(mWebView.canGoForward()){
+				mWebView.goForward();
+			}
+			break;
 
-		});
+		case R.id.iv_return:
+			finish();
+			break;
+		default:
+			break;
+		}
 	}
 
 }

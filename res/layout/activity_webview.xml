@@ -8,9 +8,8 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="#74d1de"
-        android:gravity="center"
-        android:paddingLeft="10dp" >
+        android:background="@color/main_bg"
+        android:gravity="center" >
 
         <Button
             android:id="@+id/iv_return"
@@ -21,13 +20,12 @@
             android:gravity="center" />
 
         <TextView
-            android:id="@+id/textTile"
+            android:id="@+id/tv_tile"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:background="@null"
-            android:gravity="center"
-            android:text="@string/app_name" />
+            android:gravity="center" />
 
         <Button
             android:id="@+id/bt_more"
@@ -39,6 +37,16 @@
             android:textColor="#ffffff"
             android:textSize="15sp"
             android:visibility="invisible" />
+
+        <ProgressBar
+            android:id="@+id/pb"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:indeterminateOnly="false"
+            android:max="100"
+            android:progressDrawable="@drawable/progress_bar_states" />
     </RelativeLayout>
 
     <LinearLayout
@@ -49,52 +57,62 @@
         android:background="#6c7cf3"
         android:orientation="vertical" >
 
-        <ProgressBar
-            android:id="@+id/pb"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:indeterminateOnly="false"
-            android:max="100"
-            android:progressDrawable="@drawable/progress_bar_states" />
-
         <WebView
             android:id="@+id/webview"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="#74d1de"
-            android:paddingLeft="10dp" >
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical" >
 
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_centerVertical="true"
-                android:background="@drawable/return_icons"
-                android:gravity="center" />
-
-            <TextView
-                android:layout_width="wrap_content"
+            <RadioGroup
+                android:id="@id/main_radio"
+                android:layout_width="fill_parent"
                 android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:background="@null"
-                android:gravity="center"
-                android:text="@string/app_name" />
+                android:layout_gravity="bottom"
+                android:background="@color/main_bg"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
 
-            <Button
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:clickable="true"
-                android:textColor="#ffffff"
-                android:textSize="15sp"
-                android:visibility="invisible" />
-        </RelativeLayout>
+                <RadioButton
+                    android:id="@id/radio_button0"
+                    style="@style/main_tab_bottom"
+                    android:layout_marginTop="2dp"
+                    android:drawableTop="@drawable/selector_radiogroup_bg"
+                    android:text="@string/app_name" />
+
+                <RadioButton
+                    android:id="@id/radio_button1"
+                    style="@style/main_tab_bottom"
+                    android:layout_marginTop="2dp"
+                    android:drawableTop="@drawable/selector_radiogroup_bg"
+                    android:text="@string/app_name" />
+
+                <RadioButton
+                    android:id="@id/radio_button2"
+                    style="@style/main_tab_bottom"
+                    android:layout_marginTop="2dp"
+                    android:drawableTop="@drawable/menu_left"
+                    android:text="@string/app_name" />
+
+                <RadioButton
+                    android:id="@id/radio_button3"
+                    style="@style/main_tab_bottom"
+                    android:layout_marginTop="2dp"
+                    android:drawableTop="@drawable/menu_left"
+                    android:text="@string/app_name" />
+
+                <RadioButton
+                    android:id="@id/radio_button4"
+                    style="@style/main_tab_bottom"
+                    android:layout_marginTop="2dp"
+                    android:drawableTop="@drawable/menu_left"
+                    android:text="@string/app_name" />
+            </RadioGroup>
+        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>
