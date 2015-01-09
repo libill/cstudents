@@ -1,8 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".WebViewActivity" >
+    android:layout_height="match_parent" >
 
     <RelativeLayout
         android:id="@+id/header"
@@ -25,6 +24,8 @@
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:background="@null"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
             android:gravity="center" />
 
         <Button
@@ -35,7 +36,6 @@
             android:layout_centerVertical="true"
             android:clickable="true"
             android:textColor="#ffffff"
-            android:textSize="15sp"
             android:visibility="invisible" />
 
         <ProgressBar
@@ -81,36 +81,31 @@
                     android:id="@id/radio_button0"
                     style="@style/main_tab_bottom"
                     android:layout_marginTop="2dp"
-                    android:drawableTop="@drawable/selector_radiogroup_bg"
-                    android:text="@string/app_name" />
+                    android:drawableTop="@drawable/selector_ic_action_previous_item" />
 
                 <RadioButton
                     android:id="@id/radio_button1"
                     style="@style/main_tab_bottom"
                     android:layout_marginTop="2dp"
-                    android:drawableTop="@drawable/selector_radiogroup_bg"
-                    android:text="@string/app_name" />
+                    android:drawableTop="@drawable/selector_ic_action_next_item" />
 
                 <RadioButton
                     android:id="@id/radio_button2"
                     style="@style/main_tab_bottom"
                     android:layout_marginTop="2dp"
-                    android:drawableTop="@drawable/menu_left"
-                    android:text="@string/app_name" />
+                    android:drawableTop="@drawable/selector_ic_action_favorite" />
 
                 <RadioButton
                     android:id="@id/radio_button3"
                     style="@style/main_tab_bottom"
                     android:layout_marginTop="2dp"
-                    android:drawableTop="@drawable/menu_left"
-                    android:text="@string/app_name" />
+                    android:drawableTop="@drawable/selector_ic_action_copy" />
 
                 <RadioButton
                     android:id="@id/radio_button4"
                     style="@style/main_tab_bottom"
                     android:layout_marginTop="2dp"
-                    android:drawableTop="@drawable/menu_left"
-                    android:text="@string/app_name" />
+                    android:drawableTop="@drawable/selector_ic_action_share" />
             </RadioGroup>
         </LinearLayout>
     </LinearLayout>
