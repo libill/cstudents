@@ -1,15 +1,13 @@
 package com.example.mall.activity;
 
-import com.example.mall.R;
-import com.example.mall.R.id;
-import com.example.mall.R.layout;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+
+import com.example.mall.R;
 
 public class MainActivity extends Activity{
 	private String TAG="MainActivity";

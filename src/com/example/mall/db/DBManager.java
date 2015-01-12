@@ -4,10 +4,12 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 public class DBManager {
-	private static DBHelper helper;
+	private static DBHelper dBHelper;
 	private SQLiteDatabase db;
 	private static DBManager instance = null;
 	private Context context;
+	
+	private TFavorite tFavorite;
 
 	public static DBManager getInstance(Context context) {
 		if (instance == null) {
@@ -17,8 +19,16 @@ public class DBManager {
 	}
 
 	public DBManager(Context context) {
-		db = helper.getWritableDatabase();
+		dBHelper = DBHelper.getInstance(context);
+		db = dBHelper.getWritableDatabase();
 		this.context = context;
 
+	}
+	
+	public TFavorite TFavorite() {
+		if (tFavorite == null) {
+			tFavorite = new TFavorite(db);
+		}
+		return tFavorite;
 	}
 }
