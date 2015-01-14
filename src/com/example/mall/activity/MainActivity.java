@@ -96,7 +96,7 @@ public class MainActivity extends FragmentActivity {
 	 * @return
 	 */
 	private View createTab(String tabLabelText, int tabIndex) {
-		View tabIndicator = LayoutInflater.from(this).inflate(R.layout.main_tabwidget_layout, null);
+		View tabIndicator = LayoutInflater.from(this).inflate(R.layout.layout_main_tabwidget, null);
 		TextView normalTV = (TextView) tabIndicator.findViewById(R.id.normalTV);
 		TextView selectedTV = (TextView) tabIndicator.findViewById(R.id.selectedTV);
 		normalTV.setText(tabLabelText);

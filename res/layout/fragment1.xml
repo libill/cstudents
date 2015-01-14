@@ -1,22 +1,41 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:background="#FF0000"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    
-    <Button 
-        android:id="@+id/btn1"
-        android:layout_width="fill_parent" 
-        android:layout_height="wrap_content" 
-        android:text="改变文本为Hello Viewpager"
-        />
-    
-    <TextView
-        android:id="@+id/tv1"
-        android:layout_width="fill_parent" 
-        android:layout_height="wrap_content" 
-        android:text="第一个fragment"
-        />
-    
-</LinearLayout>
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:scrollbars="none" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <com.example.mall.view.autoscrollviewpager.AutoScrollViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="150dp" />
+
+        <com.example.mall.view.autoscrollviewpager.CirclePageIndicator
+            android:id="@+id/indicator"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            app:fillColor="@android:color/holo_red_dark"
+            android:background="@android:color/transparent"
+            android:paddingTop="2dp"
+            android:layout_marginTop="-12dip" />
+
+        <Button
+            android:id="@+id/btn1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="改变文本为Hello Viewpager" />
+
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="fill_parent"
+            android:layout_height="1000dp"
+            android:text="第一个fragment" />
+    </LinearLayout>
+
+</ScrollView>
