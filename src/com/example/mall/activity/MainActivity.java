@@ -50,10 +50,10 @@ public class MainActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		jazzyPager = (JazzyViewPager) findViewById(R.id.jazzyPager);
-		// --------------------
+
 		tabHost = (TabHost) findViewById(android.R.id.tabhost);
 		tabHost.setup();
-		tabHost.addTab(tabHost.newTabSpec("0").setIndicator(createTab("主页", 0)).setContent(android.R.id.tabcontent));
+		tabHost.addTab(tabHost.newTabSpec("0").setIndicator(createTab("首页", 0)).setContent(android.R.id.tabcontent));
 		tabHost.addTab(tabHost.newTabSpec("1").setIndicator(createTab("统计", 1)).setContent(android.R.id.tabcontent));
 		tabHost.addTab(tabHost.newTabSpec("2").setIndicator(createTab("消息", 2)).setContent(android.R.id.tabcontent));
 		tabHost.addTab(tabHost.newTabSpec("3").setIndicator(createTab("设置", 3)).setContent(android.R.id.tabcontent));
@@ -105,8 +105,8 @@ public class MainActivity extends FragmentActivity {
 		ImageView selectedImg = (ImageView) tabIndicator.findViewById(R.id.selectedImage);
 		switch (tabIndex) {
 		case 0:
-			normalImg.setImageResource(R.drawable.scan_book);
-			selectedImg.setImageResource(R.drawable.scan_book_hl);
+			normalImg.setImageResource(R.drawable.icon_tab_home_default);
+			selectedImg.setImageResource(R.drawable.icon_tab_home_pressed);
 			break;
 		case 1:
 			normalImg.setImageResource(R.drawable.scan_qr);
@@ -161,7 +161,6 @@ public class MainActivity extends FragmentActivity {
 		tabHost.setCurrentTab(0);
 		jazzyPager.setTransitionEffect(effect);
 		jazzyPager.setAdapter(new MyViewPagerAdapter(getSupportFragmentManager()));
-		// jazzyPager.setAdapter(new MainAdapter());
 		jazzyPager.setPageMargin(0);
 		jazzyPager.setFadeEnabled(true);
 		jazzyPager.setSlideCallBack(new SlideCallback() {
@@ -244,41 +243,4 @@ public class MainActivity extends FragmentActivity {
 		}
 
 	}
-
-//	private class MainAdapter extends PagerAdapter {
-//		@Override
-//		public Object instantiateItem(ViewGroup container, final int position) {
-//			TextView text = new TextView(MainActivity.this);
-//			text.setGravity(Gravity.CENTER);
-//			text.setTextSize(30);
-//			text.setTextColor(Color.WHITE);
-//			text.setText("Page " + position);
-//			text.setPadding(30, 30, 30, 30);
-//			int bg = Color.rgb((int) Math.floor(Math.random() * 128) + 64, (int) Math.floor(Math.random() * 128) + 64, (int) Math.floor(Math.random() * 128) + 64);
-//			text.setBackgroundColor(bg);
-//			container.addView(text, LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-//			jazzyPager.setObjectForPosition(text, position);
-//			return text;
-//		}
-//
-//		@Override
-//		public void destroyItem(ViewGroup container, int position, Object obj) {
-//			container.removeView(jazzyPager.findViewFromObject(position));
-//		}
-//
-//		@Override
-//		public int getCount() {
-//			return 4;
-//		}
-//
-//		@Override
-//		public boolean isViewFromObject(View view, Object obj) {
-//			if (view instanceof OutlineContainer) {
-//				return ((OutlineContainer) view).getChildAt(0) == obj;
-//			} else {
-//				return view == obj;
-//			}
-//		}
-//	}
-
 }
