@@ -40,3 +40,7 @@ nosetests.xml
 .classpath
 *.iml
 gradle
+.classpath
+*.classpath
+.settings/org.eclipse.core.resources.prefs
+cstudents.iml
