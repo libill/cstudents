@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- the theme applied to the application or activity -->
+    <style name="CustomActionBarTheme" parent="@style/Theme.AppCompat.Light">
+        <!--<item name="android:windowBackground">@drawable/splash</item>-->
+        <item name="android:windowBackground">@color/white</item>
+        <item name="actionBarSize">@dimen/px_hdpi_48</item>
+        <item name="actionBarItemBackground">@drawable/btn_ab_back_select</item>
+        <item name="selectableItemBackground">@drawable/btn_ab_back_select</item>
+        <!-- Support library compatibility -->
+        <item name="actionBarStyle">@style/MyActionBar</item>
+        <item name="actionBarTabStyle">@style/MyActionBarTabStyle</item>
+        <item name="actionBarTabTextStyle">@style/TabTextStyle</item>
+        <item name="actionMenuTextColor">@color/white</item>
+        <item name="actionButtonStyle">@style/ActionButtonStyle</item>
+        <!-- Dropdown Spinner Attributes -->
+        <item name="actionDropDownStyle">@style/myActionDropDownStyle</item>
+        <item name="dropDownListViewStyle">@style/myActionDropDownListViewStyle</item>
+
+        <!--妯悜婊氬姩listview鏍峰紡 -->
+        <!--<item name="hlv_listViewStyle">@style/HListView</item>-->
+        <!--<item name="hlv_absHListViewStyle">@style/AbsHListView</item>-->
+        <!--<item name="hlv_listPreferredItemWidth">64dip</item>-->
+    </style>
+
+    <!-- general styles for the action bar -->
+    <style name="MyActionBar" parent="@style/Widget.AppCompat.ActionBar">
+        <!-- Support library compatibility -->
+        <item name="titleTextStyle">@style/BarTitleTextStyle</item>
+        <item name="background">@drawable/bg_header</item>
+        <item name="backgroundStacked">@drawable/bg_header</item>
+        <item name="backgroundSplit">@drawable/bg_header</item>
+    </style>
+    <!-- style for the tabs -->
+    <style name="MyActionBarTabStyle" parent="@style/Widget.AppCompat.ActionBar.TabView"></style>
+
+    <style name="myActionDropDownStyle" parent="@style/Widget.AppCompat.Spinner.DropDown.ActionBar">
+        <item name="android:paddingLeft">0dip</item>
+        <item name="android:paddingRight">0dip</item>
+        <item name="android:background">@drawable/icon_contact_header_subscript_select</item>
+        <item name="android:popupBackground">@drawable/bg_more_popup_selector</item>
+        <item name="android:dropDownSelector">@drawable/bg_more_popup_selector</item>
+        <item name="android:dropDownWidth">@dimen/px_hdpi_100</item>
+    </style>
+
+    <style name="myActionDropDownListViewStyle" parent="@style/Widget.AppCompat.ListView.DropDown">
+        <item name="android:listSelector">@drawable/bg_more_popup_selector</item>
+    </style>
+
+    <!-- action bar title text -->
+    <style name="BarTitleTextStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/font_size_px_30</item>
+    </style>
+
+    <!-- action bar tab text -->
+    <style name="TabTextStyle" parent="@style/Widget.AppCompat.ActionBar.TabText">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/font_size_px_16</item>
+    </style>
+
+    <!-- action bar button -->
+    <style name="ActionButtonStyle" parent="@style/Widget.AppCompat.Light.ActionButton"></style>
+
+    <!-- 閫忔槑 -->
+    <style name="transparentActivity" parent="@style/CustomActionBarTheme">
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>
+    </style>
+
+    <style name="Theme.AppStart" parent="Theme.AppCompat.Light">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <!-- 閫忔槑 -->
+    <style name="transparent" parent="@style/CustomActionBarTheme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>
+    </style>
+
+</resources>

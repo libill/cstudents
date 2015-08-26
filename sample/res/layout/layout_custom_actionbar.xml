@@ -1,0 +1,35 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/px_hdpi_16"
+    android:paddingRight="@dimen/px_hdpi_16">
+
+    <ImageView
+        android:id="@+id/iv_bar_logo"
+        android:layout_width="@dimen/px_hdpi_84"
+        android:layout_height="@dimen/px_hdpi_84"
+        android:scaleType="center"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_launcher" />
+
+    <TextView
+        android:id="@+id/tv_bar_title"
+        style="@style/BarTitleTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="4dip"
+        android:layout_toRightOf="@+id/iv_bar_logo"
+        android:text="首页" />
+
+
+    <TextView
+        android:id="@+id/tv_bar_more"
+        style="@style/BarTitleTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:text="更多"
+        android:visibility="visible" />
+</RelativeLayout>
