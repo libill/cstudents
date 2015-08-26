@@ -1,22 +1,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="#FF0000"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    
-    <Button 
+    <cn.lightsky.infiniteindicator.InfiniteIndicatorLayout
+        android:id="@+id/indicator_custome_circle"
+        android:layout_width="match_parent"
+        app:indicator_type="indicator_default"
+        android:layout_height="180dip"/>
+    <Button
         android:id="@+id/btn1"
-        android:layout_width="fill_parent" 
-        android:layout_height="wrap_content" 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:text="改变文本为Hello Viewpager"
         />
-    
-    <TextView
-        android:id="@+id/tv1"
-        android:layout_width="fill_parent" 
-        android:layout_height="wrap_content" 
-        android:text="第一个fragment"
-        />
-    
+
+
+
 </LinearLayout>
