@@ -109,6 +109,7 @@ public class Fragment1 extends Fragment implements BaseSliderView.OnSliderClickL
                     .putString("extra", name);
             mCustoemIndicatorLayout.addSlider(textSliderView);
         }
+        mCustoemIndicatorLayout.setInfinite(true);
         mCustoemIndicatorLayout.setIndicatorPosition(InfiniteIndicatorLayout.IndicatorPosition.Center_Bottom);
         CircleIndicator circleIndicator = ((CircleIndicator) mCustoemIndicatorLayout.getPagerIndicator());
         final float density = getResources().getDisplayMetrics().density;

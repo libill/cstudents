@@ -1,5 +1,6 @@
 package com.example.mall.activity;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.app.Fragment;
@@ -57,6 +58,8 @@ public class MainActivity extends BaseActivity {
 		ViewUtils.inject(this);
 		initUI();
 		initData();
+
+		startGuideActivity();
 	}
 
 	private void initUI(){
@@ -251,6 +254,11 @@ public class MainActivity extends BaseActivity {
 		
 		// 重新加载数据
 		initJazzyPager(TransitionEffect.Standard);
+	}
+
+	private void startGuideActivity(){
+		Intent intent = new Intent(MainActivity.this, GuideActivity.class);
+		startActivity(intent);
 	}
 
 	public class MyViewPagerAdapter extends FragmentPagerAdapter {

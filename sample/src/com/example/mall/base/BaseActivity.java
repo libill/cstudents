@@ -197,7 +197,6 @@ public abstract class BaseActivity extends ActionBarActivity {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
-
     }
 
     public abstract void initView();
@@ -208,5 +207,9 @@ public abstract class BaseActivity extends ActionBarActivity {
 
     public void setActionBarTitle(String titleName) {
         getSupportActionBar().setTitle(titleName);
+    }
+
+    public void hideActionBar(){
+        getSupportActionBar().hide();
     }
 }
