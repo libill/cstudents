@@ -1,34 +1,37 @@
 package com.example.mall.activity;
 
-import android.widget.Toast;
+import android.view.View;
+import android.view.View.OnClickListener;
 
 import com.example.mall.R;
 import com.example.mall.base.BaseActivity;
+import com.example.mall.view.GuideSliderView;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 
 import cn.lightsky.infiniteindicator.InfiniteIndicatorLayout;
 import cn.lightsky.infiniteindicator.indicator.CircleIndicator;
 import cn.lightsky.infiniteindicator.slideview.BaseSliderView;
-import cn.lightsky.infiniteindicator.slideview.DefaultSliderView;
 
 public class GuideActivity extends BaseActivity implements BaseSliderView.OnSliderClickListener {
     private InfiniteIndicatorLayout mGuideIndicatorLayout;
 
-    private HashMap<String, String> url_maps;
+    private List<Integer> resIdList;
 
     @Override
     public void initView() {
         setContentView(R.layout.activity_guide);
         initUI();
         initTitle();
-        url_maps = new HashMap<String, String>();
-        url_maps.put("Page A", "https://raw.githubusercontent.com/lightSky/InfiniteIndicator/master/res/a.jpg");
-        url_maps.put("Page B", "https://raw.githubusercontent.com/lightSky/InfiniteIndicator/master/res/b.jpg");
-        url_maps.put("Page C", "https://raw.githubusercontent.com/lightSky/InfiniteIndicator/master/res/c.jpg");
-        url_maps.put("Page D", "https://raw.githubusercontent.com/lightSky/InfiniteIndicator/master/res/d.jpg");
+        resIdList = new ArrayList<Integer>();
+        resIdList.add(R.layout.layout_guide_1);
+        resIdList.add(R.layout.layout_guide_2);
+        resIdList.add(R.layout.layout_guide_3);
+        resIdList.add(R.layout.layout_guide_4);
 
         testCustomCircleIndicator();
+
     }
 
     private void initUI(){
@@ -40,15 +43,11 @@ public class GuideActivity extends BaseActivity implements BaseSliderView.OnSlid
     }
 
     private void testCustomCircleIndicator() {
-        for (String name : url_maps.keySet()) {
-            DefaultSliderView textSliderView = new DefaultSliderView(this);
+        for (Integer resId : resIdList) {
+            GuideSliderView textSliderView = new GuideSliderView(GuideActivity.this, resId, finishListener);
             textSliderView
-                    .image(url_maps.get(name))
                     .setScaleType(BaseSliderView.ScaleType.Fit)
-                    .showImageResForError(R.drawable.ic_launcher)
                     .setOnSliderClickListener(this);
-            textSliderView.getBundle()
-                    .putString("extra", name);
             mGuideIndicatorLayout.addSlider(textSliderView);
         }
         mGuideIndicatorLayout.setInfinite(false);
@@ -63,13 +62,23 @@ public class GuideActivity extends BaseActivity implements BaseSliderView.OnSlid
         circleIndicator.setStrokeWidth(2 * density);
     }
 
+    /**
+     * 结束Activity监听器
+     */
+    private OnClickListener finishListener = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            finish();
+        }
+    };
+
     @Override
     public void onSliderClick(BaseSliderView slider) {
-        Toast.makeText(this, slider.getBundle().get("extra") + "", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, slider.getBundle().get("extra") + "", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onBackPressed() {
-        finish();
+        //finish();
     }
 }

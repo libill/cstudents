@@ -41,7 +41,6 @@
             </intent-filter>
         </activity>
 
-
         <activity
             android:name="com.example.mall.activity.WebViewActivity"
             android:screenOrientation="portrait" />
