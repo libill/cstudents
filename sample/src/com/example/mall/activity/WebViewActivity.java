@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
@@ -64,16 +65,9 @@ public class WebViewActivity extends BaseActivity implements OnClickListener {
 		radio_button2.setOnClickListener(this);
 		radio_button3.setOnClickListener(this);
 		radio_button4.setOnClickListener(this);
+		WebSettings settings = mWebView.getSettings();
+		setWebViewSettings(settings);
 
-		// webview 初始化设置
-		mWebView.getSettings().setJavaScriptEnabled(true);
-		mWebView.setWebViewClient(new SampleWebViewClient());
-		mWebView.getSettings().setLoadWithOverviewMode(true);
-		mWebView.getSettings().setUseWideViewPort(true);
-		mWebView.getSettings().setSupportZoom(true);
-		mWebView.getSettings().setBuiltInZoomControls(true);
-		mWebView.getSettings().setLoadsImagesAutomatically(true);
-		mWebView.getSettings().setUserAgentString("Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1A543a Safari/419.3");
 		mWebView.setOnTouchListener(new OnTouchListener() {
 
 			@Override
@@ -82,8 +76,19 @@ public class WebViewActivity extends BaseActivity implements OnClickListener {
 			}
 
 		});
-
 		mWebView.setWebChromeClient(new MyWebChromeClient());
+	}
+
+	private void setWebViewSettings(WebSettings settings){
+		// webview 初始化设置
+		settings.setJavaScriptEnabled(true);
+		mWebView.setWebViewClient(new SampleWebViewClient());
+		settings.setLoadWithOverviewMode(true);
+		settings.setUseWideViewPort(true);
+		settings.setSupportZoom(true);
+		settings.setBuiltInZoomControls(true);
+		settings.setLoadsImagesAutomatically(true);
+		settings.setUserAgentString("Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1A543a Safari/419.3");
 	}
 
 	private void initData() {
@@ -99,7 +104,8 @@ public class WebViewActivity extends BaseActivity implements OnClickListener {
 			click_url = "http://www.cnblogs.com/liqw";
 		}
 		// mWebView.loadUrl("file:///android_asset/html/index.html");
-		mWebView.loadUrl(click_url);
+		mWebView.loadUrl("file:///android_asset/html/protocol/index.html");
+		//mWebView.loadUrl(click_url);
 		
 		setRadioButtonGoBack();
 		setRadioButtonGoForward();
