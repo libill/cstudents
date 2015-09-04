@@ -4,16 +4,13 @@ package com.example.mall.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mall.R;
-import com.example.mall.activity.MainActivity;
 import com.example.mall.activity.WebViewActivity;
 
 import java.util.HashMap;
@@ -26,9 +23,8 @@ import cn.lightsky.infiniteindicator.slideview.DefaultSliderView;
 
 public class Fragment1 extends Fragment implements BaseSliderView.OnSliderClickListener {
     private View mMainView;
-    private TextView tv;
     private Button btn;
-    private InfiniteIndicatorLayout mCustoemIndicatorLayout;
+    private InfiniteIndicatorLayout mCustomIndicatorLayout;
     private HashMap<String, String> url_maps;
 
     @Override
@@ -42,7 +38,6 @@ public class Fragment1 extends Fragment implements BaseSliderView.OnSliderClickL
 
             @Override
             public void onClick(View v) {
-                tv.setText("Hello Viewpager\"");
                 Intent intent = new Intent(getActivity(), WebViewActivity.class);
                 intent.putExtra("click_url", "http://www.cnblogs.com/liqw/p/4181327.html");
                 startActivity(intent);
@@ -77,13 +72,13 @@ public class Fragment1 extends Fragment implements BaseSliderView.OnSliderClickL
     @Override
     public void onPause() {
         super.onPause();
-        mCustoemIndicatorLayout.stopAutoScroll();
+        mCustomIndicatorLayout.stopAutoScroll();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mCustoemIndicatorLayout.startAutoScroll();
+        mCustomIndicatorLayout.startAutoScroll();
     }
 
     @Override
@@ -97,7 +92,7 @@ public class Fragment1 extends Fragment implements BaseSliderView.OnSliderClickL
     }
 
     private void testCustomCircleIndicator() {
-        mCustoemIndicatorLayout = (InfiniteIndicatorLayout) mMainView.findViewById(R.id.indicator_custome_circle);
+        mCustomIndicatorLayout = (InfiniteIndicatorLayout) mMainView.findViewById(R.id.indicator_custome_circle);
         for (String name : url_maps.keySet()) {
             DefaultSliderView textSliderView = new DefaultSliderView(getActivity());
             textSliderView
@@ -107,11 +102,11 @@ public class Fragment1 extends Fragment implements BaseSliderView.OnSliderClickL
                     .setOnSliderClickListener(this);
             textSliderView.getBundle()
                     .putString("extra", name);
-            mCustoemIndicatorLayout.addSlider(textSliderView);
+            mCustomIndicatorLayout.addSlider(textSliderView);
         }
-        mCustoemIndicatorLayout.setInfinite(true);
-        mCustoemIndicatorLayout.setIndicatorPosition(InfiniteIndicatorLayout.IndicatorPosition.Center_Bottom);
-        CircleIndicator circleIndicator = ((CircleIndicator) mCustoemIndicatorLayout.getPagerIndicator());
+        mCustomIndicatorLayout.setInfinite(true);
+        mCustomIndicatorLayout.setIndicatorPosition(InfiniteIndicatorLayout.IndicatorPosition.Center_Bottom);
+        CircleIndicator circleIndicator = ((CircleIndicator) mCustomIndicatorLayout.getPagerIndicator());
         final float density = getResources().getDisplayMetrics().density;
         circleIndicator.setBackgroundColor(getResources().getColor(R.color.transparent));
         circleIndicator.setRadius(5 * density);

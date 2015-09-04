@@ -8,8 +8,8 @@
         android:id="@+id/iv_bar_logo"
         android:layout_width="@dimen/px_hdpi_84"
         android:layout_height="@dimen/px_hdpi_84"
-        android:scaleType="center"
         android:layout_centerVertical="true"
+        android:scaleType="center"
         android:src="@drawable/ic_launcher" />
 
     <TextView
@@ -20,7 +20,8 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="4dip"
         android:layout_toRightOf="@+id/iv_bar_logo"
-        android:text="首页" />
+        android:text="首页"
+        android:textColor="@color/blue" />
 
 
     <TextView
@@ -31,5 +32,6 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:text="更多"
+        android:textColor="@color/blue"
         android:visibility="visible" />
 </RelativeLayout>
