@@ -21,15 +21,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mall.R;
+import com.example.mall.base.BaseActivity;
 import com.example.mall.db.DBManager;
 import com.example.mall.model.Favorite;
 import com.example.mall.util.FormatUtils;
 
-public class WebViewActivity extends Activity implements OnClickListener {
+public class WebViewActivity extends BaseActivity implements OnClickListener {
 	private String TAG = "WebViewActivity";
 	private WebView mWebView;
-	private Button iv_return;
-	private static TextView tv_tile;
 	private static ProgressBar loadProgressBar;
 	private RadioButton radio_button0;
 	private RadioButton radio_button1;
@@ -42,19 +41,19 @@ public class WebViewActivity extends Activity implements OnClickListener {
 	public interface RefreshListener{
 		public void onRefresh();
 	};
-	
+
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+	public void initView() {
 		setContentView(R.layout.activity_webview);
-		initView();
+
+		setActionBarBack(true);
+		initUI();
 		initData();
 	}
 
-	private void initView() {
+	private void initUI() {
 		mWebView = (WebView) findViewById(R.id.webview);
 		loadProgressBar = (ProgressBar) findViewById(R.id.pb);
-		tv_tile = (TextView) findViewById(R.id.tv_bar_title);
 		radio_button0 = (RadioButton) findViewById(R.id.radio_button0);
 		radio_button1 = (RadioButton) findViewById(R.id.radio_button1);
 		radio_button2 = (RadioButton) findViewById(R.id.radio_button2);
@@ -65,9 +64,6 @@ public class WebViewActivity extends Activity implements OnClickListener {
 		radio_button2.setOnClickListener(this);
 		radio_button3.setOnClickListener(this);
 		radio_button4.setOnClickListener(this);
-
-		iv_return = (Button) findViewById(R.id.iv_return);
-		iv_return.setOnClickListener(this);
 
 		// webview 初始化设置
 		mWebView.getSettings().setJavaScriptEnabled(true);
@@ -159,11 +155,11 @@ public class WebViewActivity extends Activity implements OnClickListener {
 	}
 
 	private void setWebViewTitle(String title) {
-		if (title.length() > 16) {
-			title = title.substring(0, 16) + "..";
+		String titleName = title;
+		if (titleName.length() > 16) {
+			titleName = titleName.substring(0, 16) + "..";
 		}
-
-		tv_tile.setText(title);
+		setActionBarTitle(titleName);
 	}
 
 	/**
@@ -248,10 +244,6 @@ public class WebViewActivity extends Activity implements OnClickListener {
 			Toast.makeText(getApplicationContext(), "链接已复制到剪贴板", Toast.LENGTH_SHORT).show();
 			ClipboardManager clip = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
 			clip.setText(mWebView.getUrl());
-			break;
-
-		case R.id.iv_return:
-			finish();
 			break;
 		default:
 			break;

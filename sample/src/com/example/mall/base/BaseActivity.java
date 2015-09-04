@@ -97,6 +97,7 @@ public abstract class BaseActivity extends ActionBarActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(isShow);
         // 页面主按钮【如 登录，主页】设置
         getSupportActionBar().setHomeButtonEnabled(isShow);
+        getSupportActionBar().setDisplayShowHomeEnabled(false);
     }
 
     /**
