@@ -21,7 +21,7 @@
         android:layout_marginLeft="4dip"
         android:layout_toRightOf="@+id/iv_bar_logo"
         android:text="首页"
-        android:textColor="@color/blue" />
+        android:textColor="@color/white" />
 
 
     <TextView
@@ -32,6 +32,6 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:text="更多"
-        android:textColor="@color/blue"
+        android:textColor="@color/white"
         android:visibility="visible" />
 </RelativeLayout>

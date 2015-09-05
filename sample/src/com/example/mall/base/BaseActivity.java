@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.inputmethod.InputMethodManager;
@@ -34,18 +35,20 @@ public abstract class BaseActivity extends ActionBarActivity {
     protected Bundle cfgMetaData;
     protected Boolean isHideActionBar;
 
+    protected boolean isShowActionBarBack = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         fragmentManager = getSupportFragmentManager();
         initView();
+        setActionBar();
     }
 
     private void setActionBar() {
         if (detectHideActionBar()) {
             return;
         }
-
 
         forceShowOverflowMenu();
         // 显示自定义的view
@@ -54,8 +57,9 @@ public abstract class BaseActivity extends ActionBarActivity {
         getSupportActionBar().setLogo(new BitmapDrawable(getResources()));
         // 设置返回drawable
         getSupportActionBar().setHomeAsUpIndicator(
-                R.drawable.bt_header_back_logo_default);
+                R.drawable.action_bar_back);
         setActionBarBack(true);
+        setActionBarBackground();
     }
 
     private boolean detectHideActionBar() {
@@ -92,12 +96,30 @@ public abstract class BaseActivity extends ActionBarActivity {
         }
     }
 
-    protected void setActionBarBack(boolean isShow) {
+    protected void setActionBarBack(boolean isShowActionBarBack) {
+        this.isShowActionBarBack = isShowActionBarBack;
         // 页面返回设置
-        getSupportActionBar().setDisplayHomeAsUpEnabled(isShow);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(isShowActionBarBack);
         // 页面主按钮【如 登录，主页】设置
-        getSupportActionBar().setHomeButtonEnabled(isShow);
+        getSupportActionBar().setHomeButtonEnabled(isShowActionBarBack);
+        // 隐藏home icon
         getSupportActionBar().setDisplayShowHomeEnabled(false);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:// 点击返回图标事件
+                if(isShowActionBarBack) {
+                    this.finish();
+                }
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    protected void setActionBarBackground(){
+        getActionBar().setBackgroundDrawable(this.getBaseContext().getResources().getDrawable(R.drawable.bg_header));
     }
 
     /**

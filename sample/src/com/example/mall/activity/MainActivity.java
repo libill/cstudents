@@ -59,7 +59,8 @@ public class MainActivity extends BaseActivity {
 		initUI();
 		initData();
 
-		startGuideActivity();
+		// 引导页
+		//startGuideActivity();
 	}
 
 	private void initUI(){
