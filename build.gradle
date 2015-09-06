@@ -1,0 +1,7 @@
+allprojects {
+    //子项目Java源文件编码为UTF-8
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+    }
+
+}

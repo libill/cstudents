@@ -1,6 +1,5 @@
 package com.example.mall.activity;
 
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.app.Fragment;
@@ -9,8 +8,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -25,6 +22,8 @@ import com.example.mall.fragment.Fragment1;
 import com.example.mall.fragment.Fragment2;
 import com.example.mall.fragment.Fragment3;
 import com.example.mall.fragment.Fragment4;
+import com.example.mall.model.TestModel;
+import com.example.mall.network.Test;
 import com.example.mall.view.JazzyViewPager;
 import com.example.mall.view.JazzyViewPager.SlideCallback;
 import com.example.mall.view.JazzyViewPager.TransitionEffect;
@@ -59,8 +58,9 @@ public class MainActivity extends BaseActivity {
 		initUI();
 		initData();
 
-		// 引导页
-		//startGuideActivity();
+		TestModel m = new TestModel();
+		m.setTitle("sdf");
+		Test.getData(this, m);
 	}
 
 	private void initUI(){
@@ -257,11 +257,6 @@ public class MainActivity extends BaseActivity {
 		initJazzyPager(TransitionEffect.Standard);
 	}
 
-	private void startGuideActivity(){
-		Intent intent = new Intent(MainActivity.this, GuideActivity.class);
-		startActivity(intent);
-	}
-
 	public class MyViewPagerAdapter extends FragmentPagerAdapter {
 		public MyViewPagerAdapter(FragmentManager fm) {
 			super(fm);
@@ -287,5 +282,6 @@ public class MainActivity extends BaseActivity {
 		public CharSequence getPageTitle(int position) {
 			return titleList.get(position);
 		}
+
 	}
 }

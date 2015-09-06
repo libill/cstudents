@@ -17,4 +17,11 @@
         <item>Accordion</item>
     </string-array>
 
+
+    <!-- =======================  服务器提示语  ======================= -->
+    <string name="no_internet">无网络连接~</string>
+    <string name="generic_server_down">连接服务器失败~</string>
+    <string name="generic_error">网络异常,请稍后再试~</string>
+    <string name="json_error">json转换出错~</string>
+
 </resources>

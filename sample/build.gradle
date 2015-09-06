@@ -1,3 +1,5 @@
+import java.util.regex.Pattern
+
 buildscript {
     repositories {
         mavenCentral()
@@ -14,11 +16,37 @@ dependencies {
     compile fileTree(dir: 'libs', include: '*.jar')
     compile project(':android-support-v7-appcompat')
     compile project(':infinite-indicator')
+    compile project(':android-volley')
 }
 
 android {
     compileSdkVersion 19
     buildToolsVersion '21.1.1'
+
+
+    signingConfigs {
+        myConfig {
+            storeFile file("keyfile")
+            storePassword "password"
+            keyAlias "alias"
+            keyPassword "password"
+        }
+    }
+
+    defaultConfig {
+        versionCode 1
+        versionName getVersionName()
+        minSdkVersion 11
+        targetSdkVersion 17
+    }
+
+    buildTypes{
+        release {
+            signingConfig  signingConfigs.myConfig
+            minifyEnabled true
+            proguardFile 'proguard.cfg'
+        }
+    }
 
     sourceSets {
         main {
@@ -43,4 +71,6 @@ android {
         debug.setRoot('build-types/debug')
         release.setRoot('build-types/release')
     }
+
+
 }
