@@ -27,8 +27,7 @@ public class Test {
     private static final String TAG = Test.class.getSimpleName();
 
     public static void getData(final Context mContext, BaseModel respCLass) {
-        Map<String, String> appendHeader = new HashMap<String, String>();
-        appendHeader = BeanConverterUtils.toMap(respCLass);
+        Map<String, String> appendHeader = BeanConverterUtils.toMap(respCLass);
         String url = "http://www.baidu.com/";
         JsonRequestWithAuth<TestModel> userRequest = new JsonRequestWithAuth<TestModel>(
                 url, TestModel.class, new Listener<TestModel>() {
