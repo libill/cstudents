@@ -20,7 +20,7 @@ import com.example.mall.R;
 import com.example.mall.base.BaseActivity;
 import com.example.mall.fragment.Fragment1;
 import com.example.mall.fragment.Fragment2;
-import com.example.mall.fragment.Fragment3;
+import com.example.mall.fragment.ContactsFragment;
 import com.example.mall.fragment.Fragment4;
 import com.example.mall.model.TestModel;
 import com.example.mall.network.Test;
@@ -36,14 +36,14 @@ import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends BaseActivity {
-	private static String[] tabName = new String[]{"首页","统计","消息","我的"};
+	private static String[] tabName = new String[]{"首页","统计","联系人","我的"};
 	private JazzyViewPager jazzyPager;
 	List<Map<String, View>> tabViews = new ArrayList<Map<String, View>>();
 	public TabHost tabHost;
 
 	private Fragment1 mfragment1;
 	private Fragment2 mfragment2;
-	private Fragment3 mfragment3;
+	private ContactsFragment mfragmentContacts;
 	private Fragment4 mfragment4;
 	private ArrayList<Fragment> fragmentList;
 	ArrayList<String> titleList = new ArrayList<String>();
@@ -110,13 +110,13 @@ public class MainActivity extends BaseActivity {
 
 		mfragment1 = new Fragment1();
 		mfragment2 = new Fragment2();
-		mfragment3 = new Fragment3();
+		mfragmentContacts = new ContactsFragment();
 		mfragment4 = new Fragment4();
 
 		fragmentList = new ArrayList<Fragment>();
 		fragmentList.add(mfragment1);
 		fragmentList.add(mfragment2);
-		fragmentList.add(mfragment3);
+		fragmentList.add(mfragmentContacts);
 		fragmentList.add(mfragment4);
 
 		titleList.add("1");
