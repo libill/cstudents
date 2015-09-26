@@ -12,7 +12,9 @@ import android.widget.Toast;
 
 import com.example.mall.R;
 import com.example.mall.activity.WebViewActivity;
+import com.example.mall.model.BannerModel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import cn.lightsky.infiniteindicator.InfiniteIndicatorLayout;
@@ -25,7 +27,7 @@ public class Fragment1 extends Fragment implements BaseSliderView.OnSliderClickL
     private View mMainView;
     private Button btn;
     private InfiniteIndicatorLayout mCustomIndicatorLayout;
-    private HashMap<String, String> url_maps;
+    private ArrayList<BannerModel> url_maps;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,11 +46,13 @@ public class Fragment1 extends Fragment implements BaseSliderView.OnSliderClickL
             }
         });
 
-        url_maps = new HashMap<String, String>();
-        url_maps.put("Page A", "https://raw.githubusercontent.com/lightSky/InfiniteIndicator/master/res/a.jpg");
-        url_maps.put("Page B", "https://raw.githubusercontent.com/lightSky/InfiniteIndicator/master/res/b.jpg");
-        url_maps.put("Page C", "https://raw.githubusercontent.com/lightSky/InfiniteIndicator/master/res/c.jpg");
-        url_maps.put("Page D", "https://raw.githubusercontent.com/lightSky/InfiniteIndicator/master/res/d.jpg");
+        url_maps = new ArrayList<BannerModel>();
+        BannerModel bannerModel = new BannerModel("https://www.baidu.com/img/bdlogo.png");
+        url_maps.add(bannerModel);
+        bannerModel = new BannerModel("http://p1.qhimg.com/t0151320b1d0fc50be8.png");
+        url_maps.add(bannerModel);
+        bannerModel = new BannerModel("https://www.sogou.com/images/logo2014/error180x60.png");
+        url_maps.add(bannerModel);
 
         testCustomCircleIndicator();
     }
@@ -93,18 +97,19 @@ public class Fragment1 extends Fragment implements BaseSliderView.OnSliderClickL
 
     private void testCustomCircleIndicator() {
         mCustomIndicatorLayout = (InfiniteIndicatorLayout) mMainView.findViewById(R.id.indicator_custome_circle);
-        for (String name : url_maps.keySet()) {
+        for (BannerModel model : url_maps) {
             DefaultSliderView textSliderView = new DefaultSliderView(getActivity());
             textSliderView
-                    .image(url_maps.get(name))
+                    .image(model.getURL())
                     .setScaleType(BaseSliderView.ScaleType.Fit)
                     .showImageResForError(R.drawable.ic_launcher)
                     .setOnSliderClickListener(this);
             textSliderView.getBundle()
-                    .putString("extra", name);
+                    .putString("extra", model.getURL());
             mCustomIndicatorLayout.addSlider(textSliderView);
         }
         mCustomIndicatorLayout.setInfinite(true);
+        mCustomIndicatorLayout.setInterval(1000 * 5);// 时间间隙
         mCustomIndicatorLayout.setIndicatorPosition(InfiniteIndicatorLayout.IndicatorPosition.Center_Bottom);
         CircleIndicator circleIndicator = ((CircleIndicator) mCustomIndicatorLayout.getPagerIndicator());
         final float density = getResources().getDisplayMetrics().density;

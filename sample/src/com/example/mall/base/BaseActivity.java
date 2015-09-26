@@ -41,8 +41,8 @@ public abstract class BaseActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         fragmentManager = getSupportFragmentManager();
-        initView();
         setActionBar();
+        initView();
     }
 
     private void setActionBar() {

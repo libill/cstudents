@@ -1,6 +1,5 @@
 package com.example.mall.activity;
 
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.app.Fragment;
@@ -9,8 +8,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -23,8 +20,10 @@ import com.example.mall.R;
 import com.example.mall.base.BaseActivity;
 import com.example.mall.fragment.Fragment1;
 import com.example.mall.fragment.Fragment2;
-import com.example.mall.fragment.Fragment3;
+import com.example.mall.fragment.ContactsFragment;
 import com.example.mall.fragment.Fragment4;
+import com.example.mall.model.TestModel;
+import com.example.mall.network.Test;
 import com.example.mall.view.JazzyViewPager;
 import com.example.mall.view.JazzyViewPager.SlideCallback;
 import com.example.mall.view.JazzyViewPager.TransitionEffect;
@@ -37,14 +36,14 @@ import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends BaseActivity {
-	private static String[] tabName = new String[]{"首页","统计","消息","我的"};
+	private static String[] tabName = new String[]{"首页","统计","联系人","我的"};
 	private JazzyViewPager jazzyPager;
 	List<Map<String, View>> tabViews = new ArrayList<Map<String, View>>();
 	public TabHost tabHost;
 
 	private Fragment1 mfragment1;
 	private Fragment2 mfragment2;
-	private Fragment3 mfragment3;
+	private ContactsFragment mfragmentContacts;
 	private Fragment4 mfragment4;
 	private ArrayList<Fragment> fragmentList;
 	ArrayList<String> titleList = new ArrayList<String>();
@@ -59,8 +58,9 @@ public class MainActivity extends BaseActivity {
 		initUI();
 		initData();
 
-		// 引导页
-		//startGuideActivity();
+		TestModel m = new TestModel();
+		m.setTitle("sdf");
+		Test.getData(this, m);
 	}
 
 	private void initUI(){
@@ -110,13 +110,13 @@ public class MainActivity extends BaseActivity {
 
 		mfragment1 = new Fragment1();
 		mfragment2 = new Fragment2();
-		mfragment3 = new Fragment3();
+		mfragmentContacts = new ContactsFragment();
 		mfragment4 = new Fragment4();
 
 		fragmentList = new ArrayList<Fragment>();
 		fragmentList.add(mfragment1);
 		fragmentList.add(mfragment2);
-		fragmentList.add(mfragment3);
+		fragmentList.add(mfragmentContacts);
 		fragmentList.add(mfragment4);
 
 		titleList.add("1");
@@ -257,11 +257,6 @@ public class MainActivity extends BaseActivity {
 		initJazzyPager(TransitionEffect.Standard);
 	}
 
-	private void startGuideActivity(){
-		Intent intent = new Intent(MainActivity.this, GuideActivity.class);
-		startActivity(intent);
-	}
-
 	public class MyViewPagerAdapter extends FragmentPagerAdapter {
 		public MyViewPagerAdapter(FragmentManager fm) {
 			super(fm);
@@ -287,5 +282,6 @@ public class MainActivity extends BaseActivity {
 		public CharSequence getPageTitle(int position) {
 			return titleList.get(position);
 		}
+
 	}
 }
