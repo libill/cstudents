@@ -5,6 +5,7 @@ import android.os.Handler;
 
 import com.example.mall.R;
 import com.example.mall.base.BaseActivity;
+import com.example.mall.ui.login.LoginActivity;
 
 /**
  * 在此写用途
@@ -42,7 +43,8 @@ public class WelcomeActivity extends BaseActivity {
     }
 
     private void goToMainActivity(){
-        Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
+        //Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
+        Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
     }

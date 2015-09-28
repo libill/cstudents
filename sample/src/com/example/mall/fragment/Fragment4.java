@@ -8,68 +8,62 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.mall.R;
+import com.example.mall.base.BaseFragment;
 
-public class Fragment4 extends Fragment{
-	private View mMainView;
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		super.onCreate(savedInstanceState);
-		Log.v("huahua", "fragment3-->onCreate()");
-		
-		LayoutInflater inflater = getActivity().getLayoutInflater();
-		mMainView = inflater.inflate(R.layout.fragment_mine, (ViewGroup)getActivity().findViewById(R.id.jazzyPager), false);
-	}
+public class Fragment4 extends BaseFragment {
+    private View mMainView;
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		Log.v("huahua", "fragment3-->onCreateView()");
-		
-		ViewGroup p = (ViewGroup) mMainView.getParent(); 
-        if (p != null) { 
-            p.removeAllViewsInLayout(); 
-            Log.v("huahua", "fragment3-->�Ƴ��Ѵ��ڵ�View");
-        } 
-		
-		return mMainView;
-	}
-	
-	@Override
-	public void onDestroy() {
-		// TODO Auto-generated method stub
-		super.onDestroy();
-		Log.v("huahua", "fragment3-->onDestroy()");
-	}
+    @Override
+    public void initView() {
+        initUI();
+        initData();
+    }
 
-	@Override
-	public void onPause() {
-		// TODO Auto-generated method stub
-		super.onPause();
-		Log.v("huahua", "fragment3-->onPause()");
-	}
+    private void initUI() {
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        mMainView = inflater.inflate(R.layout.fragment_mine, (ViewGroup) getActivity().findViewById(R.id.jazzyPager), false);
+    }
 
-	@Override
-	public void onResume() {
-		// TODO Auto-generated method stub
-		super.onResume();
-		Log.v("huahua", "fragment3-->onResume()");
-	}
+    private void initData(){
 
-	@Override
-	public void onStart() {
-		// TODO Auto-generated method stub
-		super.onStart();
-		Log.v("huahua", "fragment3-->onStart()");
-	}
+    }
 
-	@Override
-	public void onStop() {
-		// TODO Auto-generated method stub
-		super.onStop();
-		Log.v("huahua", "fragment3-->onStop()");
-	}
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        ViewGroup p = (ViewGroup) mMainView.getParent();
+        if (p != null) {
+            p.removeAllViewsInLayout();
+        }
+
+        return mMainView;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
 
 }
 

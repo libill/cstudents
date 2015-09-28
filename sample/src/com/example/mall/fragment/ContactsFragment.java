@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mall.R;
+import com.example.mall.base.BaseFragment;
 import com.example.mall.ui.contacts.ClearEditText;
 import com.example.mall.ui.contacts.Pinyin4jUtil;
 import com.example.mall.ui.contacts.PinyinComparator;
@@ -29,7 +30,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-public class ContactsFragment extends Fragment {
+public class ContactsFragment extends BaseFragment {
     private View mMainView;
     @ViewInject(R.id.sort_listview)
     private ListView sortListView;
@@ -52,8 +53,7 @@ public class ContactsFragment extends Fragment {
     private PinyinComparator pinyinComparator;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void initView() {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         mMainView = inflater.inflate(R.layout.fragment_contacts, (ViewGroup) getActivity().findViewById(R.id.jazzyPager), false);
         ViewUtils.inject(this, mMainView);

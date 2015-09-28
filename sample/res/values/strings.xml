@@ -64,6 +64,8 @@
         <item>~夏先生</item>
     </string-array>
 
+    <string name="login">登陆</string>
+
     <!-- =======================  服务器提示语  ======================= -->
     <string name="no_internet">无网络连接~</string>
     <string name="generic_server_down">连接服务器失败~</string>
