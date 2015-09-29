@@ -65,6 +65,11 @@
     </string-array>
 
     <string name="login">登陆</string>
+    <string name="register">注册</string>
+    <string name="input_account_hint">请输入您的手机号</string>
+    <string name="input_password_hint">请输入您的密码</string>
+    <string name="input_security_code_hint">请输入验证码</string>
+    <string name="get_security_code">获取验证码</string>
 
     <!-- =======================  服务器提示语  ======================= -->
     <string name="no_internet">无网络连接~</string>

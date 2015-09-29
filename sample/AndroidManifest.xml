@@ -14,7 +14,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
+    <uses-permission android:name="com.htc.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION" />
     <application
         android:name="com.example.mall.MallApplication"
         android:allowBackup="true"
@@ -46,6 +47,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.example.mall.ui.login.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.mall.ui.login.RegisterActivity"
             android:screenOrientation="portrait" />
     </application>
 </manifest>

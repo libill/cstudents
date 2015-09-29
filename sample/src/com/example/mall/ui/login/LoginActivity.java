@@ -1,9 +1,15 @@
 package com.example.mall.ui.login;
 
+import android.content.Intent;
+import android.view.View;
+
 import com.example.mall.R;
+import com.example.mall.activity.MainActivity;
 import com.example.mall.base.BaseActivity;
+import com.example.mall.view.EditTextAutoView;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.lidroid.xutils.view.annotation.event.OnClick;
 
 /**
  * 在此写用途
@@ -16,6 +22,9 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 public class LoginActivity extends BaseActivity {
     private static final String TAG = LoginActivity.class.getSimpleName();
 
+    @ViewInject(R.id.et_auto_view_account)
+    private EditTextAutoView et_auto_view_account;
+
     @Override
     public void initView() {
         setContentView(R.layout.activity_login);
@@ -27,11 +36,32 @@ public class LoginActivity extends BaseActivity {
         initData();
     }
 
-    private void initUI(){
+    private void initUI() {
 
     }
 
-    private void initData(){
+    private void initData() {
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        et_auto_view_account.requestFocus();
+        showSoftkeyboard(et_auto_view_account.getEditText());
+    }
+
+    @OnClick({R.id.bt_login, R.id.bt_register})
+    public void clickMethod(View v) {
+        switch (v.getId()) {
+            case R.id.bt_login:
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                finish();
+                break;
+            case R.id.bt_register:
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                finish();
+                break;
+        }
     }
 }
