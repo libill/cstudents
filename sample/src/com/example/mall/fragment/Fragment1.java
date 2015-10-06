@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.mall.R;
 import com.example.mall.activity.WebViewActivity;
+import com.example.mall.base.BaseFragment;
 import com.example.mall.model.BannerModel;
 
 import java.util.ArrayList;
@@ -23,15 +24,20 @@ import cn.lightsky.infiniteindicator.slideview.BaseSliderView;
 import cn.lightsky.infiniteindicator.slideview.DefaultSliderView;
 
 
-public class Fragment1 extends Fragment implements BaseSliderView.OnSliderClickListener {
+public class Fragment1 extends BaseFragment implements BaseSliderView.OnSliderClickListener {
     private View mMainView;
     private Button btn;
     private InfiniteIndicatorLayout mCustomIndicatorLayout;
     private ArrayList<BannerModel> url_maps;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void initView() {
+
+        initUI();
+        initData();
+    }
+
+    private void initUI(){
         LayoutInflater inflater = getActivity().getLayoutInflater();
         mMainView = inflater.inflate(R.layout.fragment1, (ViewGroup) getActivity().findViewById(R.id.jazzyPager), false);
 
@@ -45,7 +51,9 @@ public class Fragment1 extends Fragment implements BaseSliderView.OnSliderClickL
                 startActivity(intent);
             }
         });
+    }
 
+    private void initData(){
         url_maps = new ArrayList<BannerModel>();
         BannerModel bannerModel = new BannerModel("https://www.baidu.com/img/bdlogo.png");
         url_maps.add(bannerModel);
@@ -56,6 +64,7 @@ public class Fragment1 extends Fragment implements BaseSliderView.OnSliderClickL
 
         testCustomCircleIndicator();
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

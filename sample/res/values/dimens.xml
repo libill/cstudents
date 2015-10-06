@@ -5,6 +5,7 @@
     <dimen name="px_hdpi_2">1.0dip</dimen>
     <dimen name="px_hdpi_4">2.0dip</dimen>
     <dimen name="px_hdpi_8">4.0dip</dimen>
+    <dimen name="px_hdpi_10">5.0dip</dimen>
     <dimen name="px_hdpi_12">6.0dip</dimen>
     <dimen name="px_hdpi_14">7.0dip</dimen>
     <dimen name="px_hdpi_16">8.0dip</dimen>
@@ -45,6 +46,7 @@
     <dimen name="font_size_px_28">14.0sp</dimen>
     <dimen name="font_size_px_30">15.0sp</dimen>
     <dimen name="font_size_px_32">16.0sp</dimen>
+    <dimen name="font_size_px_36">18.0sp</dimen>
     <dimen name="font_size_px_40">20.0sp</dimen>
     <dimen name="font_size_px_48">24.0sp</dimen>
     <dimen name="font_size_px_60">30.0sp</dimen>

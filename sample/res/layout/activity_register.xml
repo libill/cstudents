@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:auto="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.example.mall.view.EditTextAutoView
+        android:id="@+id/et_auto_view_account"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/px_hdpi_84"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/px_hdpi_20"
+        android:layout_marginRight="@dimen/px_hdpi_20"
+        android:layout_marginTop="@dimen/px_hdpi_20"
+        auto:drawableLeftdefault="@drawable/ic_action_copy"
+        auto:drawableLeftfocus="@drawable/ic_action_copy"
+        auto:hint="@string/input_account_hint"
+        auto:inputType="number"
+        auto:maxLength="11"
+        auto:showBytes="false" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.example.mall.view.EditTextAutoView
+            android:id="@+id/et_auto_view_password"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/px_hdpi_84"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="@dimen/px_hdpi_20"
+            android:layout_marginRight="@dimen/px_hdpi_20"
+            android:layout_marginTop="@dimen/px_hdpi_20"
+            android:layout_weight="1"
+            auto:drawableLeftdefault="@drawable/ic_action_copy"
+            auto:drawableLeftfocus="@drawable/ic_action_copy"
+            auto:hint="@string/input_security_code_hint"
+            auto:inputType="number"
+            auto:maxLength="10"
+            auto:showBytes="false" />
+
+        <Button
+            android:id="@+id/bt_count_down"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/get_security_code" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/bt_register"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_hdpi_100"
+        android:text="@string/register" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/cb_agree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/selector_checkbox"
+            android:text="已经阅读并同意"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/font_size_px_28" />
+
+        <TextView
+            android:id="@+id/tv_user_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="使用条款和隐私政策"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/font_size_px_28" />
+    </LinearLayout>
+</LinearLayout>

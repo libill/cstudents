@@ -18,6 +18,7 @@ import android.support.v7.app.ActionBar.LayoutParams;
 
 import com.example.mall.R;
 import com.example.mall.base.BaseActivity;
+import com.example.mall.base.BaseFragment;
 import com.example.mall.fragment.Fragment1;
 import com.example.mall.fragment.Fragment2;
 import com.example.mall.fragment.ContactsFragment;
@@ -45,7 +46,7 @@ public class MainActivity extends BaseActivity {
 	private Fragment2 mfragment2;
 	private ContactsFragment mfragmentContacts;
 	private Fragment4 mfragment4;
-	private ArrayList<Fragment> fragmentList;
+	private ArrayList<BaseFragment> fragmentList;
 	ArrayList<String> titleList = new ArrayList<String>();
 
 	private TextView tv_bar_title;
@@ -113,7 +114,7 @@ public class MainActivity extends BaseActivity {
 		mfragmentContacts = new ContactsFragment();
 		mfragment4 = new Fragment4();
 
-		fragmentList = new ArrayList<Fragment>();
+		fragmentList = new ArrayList<BaseFragment>();
 		fragmentList.add(mfragment1);
 		fragmentList.add(mfragment2);
 		fragmentList.add(mfragmentContacts);

@@ -8,12 +8,15 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.TextView;
 
 
 import com.example.mall.R;
@@ -110,7 +113,7 @@ public abstract class BaseActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:// 点击返回图标事件
-                if(isShowActionBarBack) {
+                if (isShowActionBarBack) {
                     this.finish();
                 }
             default:
@@ -118,8 +121,23 @@ public abstract class BaseActivity extends ActionBarActivity {
         }
     }
 
-    protected void setActionBarBackground(){
+    protected void setActionBarBackground() {
         getActionBar().setBackgroundDrawable(this.getBaseContext().getResources().getDrawable(R.drawable.bg_header));
+    }
+
+    public void showRightTwoButtons(int leftId, View.OnClickListener lefeListener,
+                                    int rightId, View.OnClickListener RightListener) {
+        View view = getLayoutInflater().inflate(R.layout.layout_actionbar_two_button, null);
+        ActionBar.LayoutParams lp = new ActionBar.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT,
+                ActionBar.LayoutParams.MATCH_PARENT, Gravity.RIGHT);
+        getSupportActionBar().setCustomView(view, lp);
+        TextView leftTv = (TextView) view.findViewById(R.id.bt_left);
+        leftTv.setVisibility(View.VISIBLE);
+        TextView rightTv = (TextView) view.findViewById(R.id.bt_right);
+        leftTv.setText(leftId);
+        leftTv.setOnClickListener(lefeListener);
+        rightTv.setText(rightId);
+        rightTv.setOnClickListener(RightListener);
     }
 
     /**
@@ -232,7 +250,7 @@ public abstract class BaseActivity extends ActionBarActivity {
         getSupportActionBar().setTitle(titleName);
     }
 
-    public void hideActionBar(){
+    public void hideActionBar() {
         getSupportActionBar().hide();
     }
 }

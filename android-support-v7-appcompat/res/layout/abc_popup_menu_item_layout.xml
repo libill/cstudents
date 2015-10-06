@@ -33,7 +33,7 @@
             android:duplicateParentState="true">
 
         <TextView
-                android:id="@+id/title"
+                android:id="@+id/tv_title"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -48,7 +48,7 @@
                 android:id="@+id/shortcut"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/title"
+                android:layout_below="@id/tv_title"
                 android:layout_alignParentLeft="true"
                 android:textAppearance="?attr/textAppearanceSmallPopupMenu"
                 android:singleLine="true"
