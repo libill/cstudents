@@ -51,5 +51,14 @@
         <activity
             android:name="com.example.mall.ui.login.RegisterActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.mall.ui.login.SelectRoleUI"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.mall.ui.login.ForgetPasswordUI"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.mall.ui.login.SMSVerificationUI"
+            android:screenOrientation="portrait" />
     </application>
 </manifest>

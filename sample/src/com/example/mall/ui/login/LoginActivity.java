@@ -51,7 +51,7 @@ public class LoginActivity extends BaseActivity {
         showSoftkeyboard(et_auto_view_account.getEditText());
     }
 
-    @OnClick({R.id.bt_login, R.id.bt_register})
+    @OnClick({R.id.tv_forget_password, R.id.bt_login, R.id.bt_register})
     public void clickMethod(View v) {
         switch (v.getId()) {
             case R.id.bt_login:
@@ -61,6 +61,9 @@ public class LoginActivity extends BaseActivity {
             case R.id.bt_register:
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
                 finish();
+                break;
+            case R.id.tv_forget_password:
+                startActivity(new Intent(LoginActivity.this, ForgetPasswordUI.class));
                 break;
         }
     }
