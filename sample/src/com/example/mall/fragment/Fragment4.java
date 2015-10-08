@@ -1,17 +1,26 @@
 package com.example.mall.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.mall.R;
 import com.example.mall.base.BaseFragment;
+import com.example.mall.ui.my.MyDataUI;
+import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.view.annotation.ViewInject;
+import com.lidroid.xutils.view.annotation.event.OnClick;
 
 public class Fragment4 extends BaseFragment {
     private View mMainView;
+
+    @ViewInject(R.id.tv_name)
+    private TextView tv_name;
 
     @Override
     public void initView() {
@@ -22,6 +31,7 @@ public class Fragment4 extends BaseFragment {
     private void initUI() {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         mMainView = inflater.inflate(R.layout.fragment_mine, (ViewGroup) getActivity().findViewById(R.id.jazzyPager), false);
+        ViewUtils.inject(this, mMainView);
     }
 
     private void initData(){
@@ -65,5 +75,13 @@ public class Fragment4 extends BaseFragment {
         super.onStop();
     }
 
+    @OnClick({R.id.tv_name})
+    public void clickMethod(View v) {
+        switch (v.getId()) {
+            case R.id.tv_name:
+                startActivity(new Intent(getActivity(), MyDataUI.class));
+                break;
+        }
+    }
 }
 

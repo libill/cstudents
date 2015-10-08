@@ -5,10 +5,10 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/tv3"
+        android:id="@+id/tv_name"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="我是第5个页面"
+        android:text="我"
         />
 
 </LinearLayout>
