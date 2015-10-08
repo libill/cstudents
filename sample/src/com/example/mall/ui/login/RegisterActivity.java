@@ -81,6 +81,7 @@ public class RegisterActivity extends BaseActivity {
                 startActivity(intent);
                 break;
             case R.id.bt_register:
+                startActivity(new Intent(this, SelectRoleUI.class));
                 break;
             case R.id.bt_count_down:
                 timer.start();

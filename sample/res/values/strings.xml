@@ -69,7 +69,19 @@
     <string name="input_account_hint">请输入您的手机号</string>
     <string name="input_password_hint">请输入您的密码</string>
     <string name="input_security_code_hint">请输入验证码</string>
+    <string name="input_sms_code_hint">请输入验证码</string>
+    <string name="input_sms_password_tips_hint">请输入6-16位密码</string>
+    <string name="input_sms_new_password_hint">请再次输入新密码</string>
     <string name="get_security_code">获取验证码</string>
+    <string name="forget_password">忘记密码</string>
+    <string name="input_phone">*请输入您注册或者绑定的手机号：</string>
+    <string name="next_step">下一步</string>
+    <string name="sms_verification">短信验证</string>
+    <string name="sms_verification_tips">*包含验证码的短信将发送到你手机\n13800138000</string>
+    <string name="get_again">重新获取</string>
+    <string name="ok">确定</string>
+    <string name="select_role">选择角色</string>
+
 
     <!-- =======================  服务器提示语  ======================= -->
     <string name="no_internet">无网络连接~</string>
