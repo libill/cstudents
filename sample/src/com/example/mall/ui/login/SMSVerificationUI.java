@@ -50,6 +50,12 @@ public class SMSVerificationUI extends BaseActivity {
         showSoftkeyboard(et_auto_view_code.getEditText());
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        hideSoftkeyboard();
+    }
+
     @OnClick({R.id.bt_get_again, R.id.bt_ok})
     public void clickMethod(View v) {
         switch (v.getId()) {

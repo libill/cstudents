@@ -29,10 +29,10 @@ android {
 
     signingConfigs {
         myConfig {
-            storeFile file("keyfile")
-            storePassword "password"
-            keyAlias "alias"
-            keyPassword "password"
+            storeFile file("etc/android.keystore")
+            storePassword "coach20151008"
+            keyAlias "android.keystore"
+            keyPassword "coach20151008"
         }
     }
 
@@ -47,7 +47,7 @@ android {
         release {
             signingConfig  signingConfigs.myConfig
             minifyEnabled true
-            proguardFile 'proguard.cfg'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.cfg'
         }
     }
 

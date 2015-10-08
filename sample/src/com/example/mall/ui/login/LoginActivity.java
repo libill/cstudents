@@ -2,6 +2,7 @@ package com.example.mall.ui.login;
 
 import android.content.Intent;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.mall.R;
 import com.example.mall.activity.MainActivity;
@@ -49,6 +50,12 @@ public class LoginActivity extends BaseActivity {
         super.onResume();
         et_auto_view_account.requestFocus();
         showSoftkeyboard(et_auto_view_account.getEditText());
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        hideSoftkeyboard();
     }
 
     @OnClick({R.id.tv_forget_password, R.id.bt_login, R.id.bt_register})

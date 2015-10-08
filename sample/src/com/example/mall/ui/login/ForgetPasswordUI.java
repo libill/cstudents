@@ -46,6 +46,12 @@ public class ForgetPasswordUI  extends BaseActivity {
         showSoftkeyboard(et_auto_view_phone.getEditText());
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        hideSoftkeyboard();
+    }
+
     @OnClick({R.id.bt_next_step})
     public void clickMethod(View v) {
         switch (v.getId()) {

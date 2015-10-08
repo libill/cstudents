@@ -58,6 +58,12 @@ public class RegisterActivity extends BaseActivity {
         showSoftkeyboard(et_auto_view_account.getEditText());
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        hideSoftkeyboard();
+    }
+
     private CountDownTimer timer = new CountDownTimer(60000, 1000) {
 
         @Override
