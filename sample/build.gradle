@@ -18,8 +18,9 @@ dependencies {
     compile project(':infinite-indicator')
     compile project(':android-volley')
     compile project(':pickerview')
+    compile project(':alertview')
 
-    //compile 'com.bigkoo:pickerview:1.0.0'
+    //compile 'com.bigkoo:alertview:1.0.1'
 }
 
 android {

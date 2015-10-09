@@ -1,0 +1,51 @@
+buildscript {
+
+    repositories {
+        maven {
+            url "http://132.126.1.70:8888/nexus/content/groups/public"
+        }
+
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:1.3.0'
+    }
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'eclipse'
+
+dependencies {
+    compile fileTree('libs')
+}
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion '22.0.1'
+
+    enforceUniquePackageName=false
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    packageBuildConfig = false
+}
+
+//导出到Eclipse
+eclipse {
+    //导出到eclipse类路径设置
+    classpath {
+        plusConfigurations += [configurations.provided]
+        plusConfigurations += [configurations.compile]
+        noExportConfigurations += [configurations.provided]
+    }
+
+}

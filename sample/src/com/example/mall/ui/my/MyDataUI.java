@@ -3,7 +3,10 @@ package com.example.mall.ui.my;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bigkoo.alertview.AlertView;
+import com.bigkoo.alertview.OnItemClickListener;
 import com.bigkoo.pickerview.OptionsPopupWindow;
 import com.bigkoo.pickerview.TimePopupWindow;
 import com.bigkoo.pickerview.TimePopupWindow.Type;
@@ -63,7 +66,14 @@ public class MyDataUI extends BaseActivity {
                 tvTime.setText(getTime(date));
             }
         });
-
+        new AlertView("上传头像", null, "取消", null,
+                new String[]{"拍照", "从相册中选择"},
+                this, AlertView.Style.ActionSheet, new OnItemClickListener(){
+            public void onItemClick(Object o,int position){
+                Toast.makeText(MyDataUI.this, "点击了第" + position + "个",
+                        Toast.LENGTH_SHORT).show();
+            }
+        }).show();
     }
 
     private void initData() {
