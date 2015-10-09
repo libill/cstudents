@@ -2,10 +2,9 @@ package com.example.mall.ui.login;
 
 import android.content.Intent;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.mall.R;
-import com.example.mall.activity.MainActivity;
+import com.example.mall.ui.main.MainActivity;
 import com.example.mall.base.BaseActivity;
 import com.example.mall.view.EditTextAutoView;
 import com.lidroid.xutils.ViewUtils;

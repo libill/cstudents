@@ -7,10 +7,12 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.Volley;
+import com.example.mall.sharemanager.ShareManager;
 
 public class MallApplication extends Application {
 	private String TAG = MallApplication.class.getSimpleName();
 	private static MallApplication mallApplication;
+	private static ShareManager shareManager ;
 
 	public synchronized static MallApplication getInstance() {
 		if (null == mallApplication) {
@@ -24,6 +26,11 @@ public class MallApplication extends Application {
 		super.onCreate();
 		// initialize the singleton
 		mallApplication = this;
+		shareManager = new ShareManager(this);
+	}
+
+	public ShareManager getShareManager(){
+		return shareManager;
 	}
 
 	/**

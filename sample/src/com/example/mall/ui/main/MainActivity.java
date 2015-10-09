@@ -1,4 +1,4 @@
-package com.example.mall.activity;
+package com.example.mall.ui.main;
 
 import android.content.res.Configuration;
 import android.graphics.drawable.BitmapDrawable;
@@ -25,6 +25,7 @@ import com.example.mall.fragment.ContactsFragment;
 import com.example.mall.fragment.Fragment4;
 import com.example.mall.model.TestModel;
 import com.example.mall.network.Test;
+import com.example.mall.sharemanager.ShareManager;
 import com.example.mall.view.JazzyViewPager;
 import com.example.mall.view.JazzyViewPager.SlideCallback;
 import com.example.mall.view.JazzyViewPager.TransitionEffect;
@@ -38,6 +39,7 @@ import java.util.Map;
 
 public class MainActivity extends BaseActivity {
 	private static String[] tabName = new String[]{"首页","统计","联系人","我的"};
+	private ShareManager shareManager;
 	private JazzyViewPager jazzyPager;
 	List<Map<String, View>> tabViews = new ArrayList<Map<String, View>>();
 	public TabHost tabHost;
@@ -93,20 +95,28 @@ public class MainActivity extends BaseActivity {
 	}
 
 	private void initData(){
+		shareManager = new ShareManager(this);
 		tabHost.setup();
 		tabHost.addTab(tabHost.newTabSpec("0").setIndicator(createTab(0)).setContent(android.R.id.tabcontent));
 		tabHost.addTab(tabHost.newTabSpec("1").setIndicator(createTab(1)).setContent(android.R.id.tabcontent));
-		tabHost.addTab(tabHost.newTabSpec("2").setIndicator(createTab(2)).setContent(android.R.id.tabcontent));
-		tabHost.addTab(tabHost.newTabSpec("3").setIndicator(createTab(3)).setContent(android.R.id.tabcontent));
+		if(shareManager.isCoach()) {
+            tabName = new String[]{"首页","统计","联系人","我的"};
+			tabHost.addTab(tabHost.newTabSpec("2").setIndicator(createTab(2)).setContent(android.R.id.tabcontent));
+            tabHost.addTab(tabHost.newTabSpec("3").setIndicator(createTab(3)).setContent(android.R.id.tabcontent));
+		} else {
+            tabName = new String[]{"首页","统计","我的"};
+            tabHost.addTab(tabHost.newTabSpec("2").setIndicator(createTab(2)).setContent(android.R.id.tabcontent));
+        }
+
 		// 点击tabHost 来切换不同的消息
 		tabHost.setOnTabChangedListener(new OnTabChangeListener() {
-			@Override
-			public void onTabChanged(String tabId) {
-				int index = Integer.parseInt(tabId);
-				setTabSelectedState(index, tabName.length);
-				tabHost.getTabContentView().setVisibility(View.GONE);// 隐藏content
-			}
-		});
+            @Override
+            public void onTabChanged(String tabId) {
+                int index = Integer.parseInt(tabId);
+                setTabSelectedState(index, tabName.length);
+                tabHost.getTabContentView().setVisibility(View.GONE);// 隐藏content
+            }
+        });
 		tabHost.setCurrentTab(0);
 
 		mfragment1 = new Fragment1();
@@ -117,13 +127,18 @@ public class MainActivity extends BaseActivity {
 		fragmentList = new ArrayList<BaseFragment>();
 		fragmentList.add(mfragment1);
 		fragmentList.add(mfragment2);
-		fragmentList.add(mfragmentContacts);
+		if(shareManager.isCoach()) {
+			fragmentList.add(mfragmentContacts);
+		}
 		fragmentList.add(mfragment4);
 
 		titleList.add("1");
 		titleList.add("2");
-		titleList.add("3");
-		titleList.add("4");
+        titleList.add("3");
+		if(shareManager.isCoach()) {
+            titleList.add("4");
+		}
+
 
 		initJazzyPager(TransitionEffect.Standard);
 	}
