@@ -87,6 +87,10 @@
     <string name="my_data">我的资料</string>
 
 
+    <string name="download_apk_tip">正在下载新版本</string>
+    <string name="download_apk_ok_tip">下载完毕，点击安装</string>
+    <string name="download_apk_failure_tip">下载失败，点击重试</string>
+
     <!-- =======================  服务器提示语  ======================= -->
     <string name="no_internet">无网络连接~</string>
     <string name="generic_server_down">连接服务器失败~</string>

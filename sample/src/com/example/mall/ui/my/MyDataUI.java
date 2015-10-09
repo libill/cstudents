@@ -13,6 +13,7 @@ import com.bigkoo.pickerview.TimePopupWindow.Type;
 import com.bigkoo.pickerview.TimePopupWindow.OnTimeSelectListener;
 import com.example.mall.R;
 import com.example.mall.base.BaseActivity;
+import com.example.mall.network.asynctask.DownloadApkTask;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
@@ -74,6 +75,10 @@ public class MyDataUI extends BaseActivity {
                         Toast.LENGTH_SHORT).show();
             }
         }).show();
+
+
+        new DownloadApkTask(this)
+                .execute("http://dldir1.qq.com/weixin/android/weixin625android620.apk");
     }
 
     private void initData() {
