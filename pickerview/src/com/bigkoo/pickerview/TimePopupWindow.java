@@ -4,8 +4,8 @@ import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 
-import com.bigkoo.pickerview.lib.ScreenInfo;
-import com.bigkoo.pickerview.lib.WheelTime;
+import com.bigkoo.pickerview.view.ScreenInfo;
+import com.bigkoo.pickerview.view.WheelTime;
 
 import android.app.Activity;
 import android.content.Context;

@@ -11,8 +11,8 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.PopupWindow;
 
-import com.bigkoo.pickerview.lib.ScreenInfo;
-import com.bigkoo.pickerview.lib.WheelOptions;
+import com.bigkoo.pickerview.view.ScreenInfo;
+import com.bigkoo.pickerview.view.WheelOptions;
 /**
  * 选项选择器，可支持一二三级联动选择
  * @author Sai
