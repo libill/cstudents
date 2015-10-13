@@ -1,4 +1,4 @@
-package com.example.mall.activity;
+package com.example.mall.ui;
 
 import android.view.View;
 import android.view.View.OnClickListener;

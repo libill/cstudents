@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.mall.R;
-import com.example.mall.activity.WebViewActivity;
+import com.example.mall.ui.WebViewActivity;
 import com.example.mall.base.BaseActivity;
 import com.example.mall.view.EditTextAutoView;
 import com.lidroid.xutils.ViewUtils;

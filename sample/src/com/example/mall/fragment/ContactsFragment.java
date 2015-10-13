@@ -1,7 +1,9 @@
 package com.example.mall.fragment;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -22,6 +24,7 @@ import com.example.mall.ui.contacts.SideBar;
 import com.example.mall.ui.contacts.SortAdapter;
 import com.example.mall.ui.contacts.SortModel;
 import com.example.mall.ui.contacts.SideBar.OnTouchingLetterChangedListener;
+import com.example.mall.ui.main.MainActivity;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
@@ -30,6 +33,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 联系人
+ * 切换tab:((MainActivity) getActivity()).chooseWhichTabInFront(1);
+ */
 public class ContactsFragment extends BaseFragment {
     private View mMainView;
     @ViewInject(R.id.sort_listview)
@@ -38,14 +45,14 @@ public class ContactsFragment extends BaseFragment {
     private SideBar sideBar;
     @ViewInject(R.id.dialog)
     private TextView dialog;
-    private SortAdapter adapter;
+    private SortAdapter sortAdapter;
     @ViewInject(R.id.et_clear)
     private ClearEditText et_clear;
 
     /**
      * 汉字转换成拼音的类
      */
-    private List<SortModel> SourceDateList;
+    private List<SortModel> sortModelList;
 
     /**
      * 根据拼音来排列ListView里面的数据类
@@ -57,21 +64,22 @@ public class ContactsFragment extends BaseFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         mMainView = inflater.inflate(R.layout.fragment_contacts, (ViewGroup) getActivity().findViewById(R.id.jazzyPager), false);
         ViewUtils.inject(this, mMainView);
-        initViews(mMainView);
+        initData();
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup p = (ViewGroup) mMainView.getParent();
         if (p != null) {
             p.removeAllViewsInLayout();
         }
-
         return mMainView;
     }
 
-    private void initViews(View view) {
+    private void initData() {
+        sortModelList = new ArrayList<SortModel>();
+        sortAdapter = new SortAdapter(getActivity(), sortModelList);
+        sortListView.setAdapter(sortAdapter);
         pinyinComparator = new PinyinComparator();
 
         sideBar.setTextView(dialog);
@@ -82,7 +90,7 @@ public class ContactsFragment extends BaseFragment {
             @Override
             public void onTouchingLetterChanged(String s) {
                 //该字母首次出现的位置
-                int position = adapter.getPositionForSection(s.charAt(0));
+                int position = sortAdapter.getPositionForSection(s.charAt(0));
                 if (position != -1) {
                     sortListView.setSelection(position);
                 }
@@ -96,20 +104,12 @@ public class ContactsFragment extends BaseFragment {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 //这里要利用adapter.getItem(position)来获取当前position所对应的对象
-                Toast.makeText(getActivity(), ((SortModel) adapter.getItem(position)).getName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), ((SortModel) sortAdapter.getItem(position)).getName(), Toast.LENGTH_SHORT).show();
             }
         });
 
-        SourceDateList = filledData(getResources().getStringArray(R.array.date));
-
-        // 根据a-z进行排序源数据
-        Collections.sort(SourceDateList, pinyinComparator);
-        adapter = new SortAdapter(getActivity(), SourceDateList);
-        sortListView.setAdapter(adapter);
-
         //根据输入框输入值的改变来过滤搜索
         et_clear.addTextChangedListener(new TextWatcher() {
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 //当输入框里面的值为空，更新为原来的列表，否则为过滤数据列表
@@ -126,21 +126,45 @@ public class ContactsFragment extends BaseFragment {
         });
     }
 
+    /**
+     * 获取联系人异步类
+     */
+    class GetContactsDataTask extends AsyncTask<Void, Integer, Integer> {
+        protected void onPreExecute() {
+        }
+
+        @Override
+        protected Integer doInBackground(Void... params) {
+            sortModelList = filledContactsData(getResources().getStringArray(R.array.contacts_array));
+            // 根据a-z进行排序源数据
+            Collections.sort(sortModelList, pinyinComparator);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Integer integer) {
+            sortAdapter.updateListView(sortModelList);
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+        }
+    }
 
     /**
-     * 为ListView填充数据
+     * 为ListView填充联系人数据
      *
-     * @param date
+     * @param contactsArray
      * @return
      */
-    private List<SortModel> filledData(String[] date) {
+    private List<SortModel> filledContactsData(String[] contactsArray) {
         List<SortModel> mSortList = new ArrayList<SortModel>();
 
-        for (int i = 0; i < date.length; i++) {
+        for (int i = 0; i < contactsArray.length; i++) {
             SortModel sortModel = new SortModel();
-            sortModel.setName(date[i]);
+            sortModel.setName(contactsArray[i]);
             //汉字转换成拼音
-            Map<String, String> mPinMap = Pinyin4jUtil.getNamToPinYin(date[i]);
+            Map<String, String> mPinMap = Pinyin4jUtil.getNamToPinYin(contactsArray[i]);
             String fullPinYin = mPinMap.get(Pinyin4jUtil.CON_FULL_PIN_YIN);
             String sortString = fullPinYin.substring(0, 1).toUpperCase();
             // 正则表达式，判断首字母是否是英文字母
@@ -165,10 +189,10 @@ public class ContactsFragment extends BaseFragment {
         List<SortModel> filterDateList = new ArrayList<SortModel>();
 
         if (TextUtils.isEmpty(filterStr)) {
-            filterDateList = SourceDateList;
+            filterDateList = sortModelList;
         } else {
             filterDateList.clear();
-            for (SortModel sortModel : SourceDateList) {
+            for (SortModel sortModel : sortModelList) {
                 String name = sortModel.getName();
                 Map<String, String> mPinMap = Pinyin4jUtil.getNamToPinYin(name);
                 String fullPinYin = mPinMap.get(Pinyin4jUtil.CON_FULL_PIN_YIN);
@@ -180,7 +204,7 @@ public class ContactsFragment extends BaseFragment {
 
         // 根据a-z进行排序
         Collections.sort(filterDateList, pinyinComparator);
-        adapter.updateListView(filterDateList);
+        sortAdapter.updateListView(filterDateList);
     }
 
     @Override
@@ -196,6 +220,7 @@ public class ContactsFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
+        new GetContactsDataTask().execute();
     }
 
     @Override

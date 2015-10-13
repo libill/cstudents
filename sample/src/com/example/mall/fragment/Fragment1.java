@@ -3,7 +3,6 @@ package com.example.mall.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +10,11 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.mall.R;
-import com.example.mall.activity.WebViewActivity;
+import com.example.mall.ui.WebViewActivity;
 import com.example.mall.base.BaseFragment;
 import com.example.mall.model.BannerModel;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import cn.lightsky.infiniteindicator.InfiniteIndicatorLayout;
 import cn.lightsky.infiniteindicator.indicator.CircleIndicator;
