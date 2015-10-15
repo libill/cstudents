@@ -17,7 +17,7 @@
         <item>Accordion</item>
     </string-array>
 
-    <string-array name="date">
+    <string-array name="contacts_array">
         <item>阿妹</item>
         <item>阿郎</item>
         <item>梵蒂冈</item>

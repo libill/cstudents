@@ -1,4 +1,4 @@
-package com.example.mall.activity;
+package com.example.mall.ui;
 
 import android.content.Intent;
 import android.os.Handler;

@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,78 +39,78 @@ import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends BaseActivity {
-	private static String[] tabName = new String[]{"首页","统计","联系人","我的"};
-	private ShareManager shareManager;
-	private JazzyViewPager jazzyPager;
-	List<Map<String, View>> tabViews = new ArrayList<Map<String, View>>();
-	public TabHost tabHost;
+    private static String[] tabName = new String[]{"首页", "统计", "联系人", "我的"};
+    private ShareManager shareManager;
+    private JazzyViewPager jazzyPager;
+    List<Map<String, View>> tabViews = new ArrayList<Map<String, View>>();
+    public TabHost tabHost;
 
-	private Fragment1 mfragment1;
-	private Fragment2 mfragment2;
-	private ContactsFragment mfragmentContacts;
-	private Fragment4 mfragment4;
-	private ArrayList<BaseFragment> fragmentList;
-	ArrayList<String> titleList = new ArrayList<String>();
+    private Fragment1 mfragment1;
+    private Fragment2 mfragment2;
+    private ContactsFragment mfragmentContacts;
+    private Fragment4 mfragment4;
+    private ArrayList<BaseFragment> fragmentList;
+    ArrayList<String> titleList = new ArrayList<String>();
 
-	private TextView tv_bar_title;
-	private ImageView iv_bar_logo;
+    private TextView tv_bar_title;
+    private ImageView iv_bar_logo;
 
-	@Override
-	public void initView() {
-		setContentView(R.layout.activity_main);
-		ViewUtils.inject(this);
-		initUI();
-		initData();
+    @Override
+    public void initView() {
+        setContentView(R.layout.activity_main);
+        ViewUtils.inject(this);
+        initUI();
+        initData();
 
-		TestModel m = new TestModel();
-		m.setTitle("sdf");
-		Test.getData(this, m);
-	}
+        TestModel m = new TestModel();
+        m.setTitle("sdf");
+        Test.getData(this, m);
+    }
 
-	private void initUI(){
-		jazzyPager = (JazzyViewPager) findViewById(R.id.jazzyPager);
-		tabHost = (TabHost) findViewById(android.R.id.tabhost);
-		initCustomActionBar();
-	}
+    private void initUI() {
+        jazzyPager = (JazzyViewPager) findViewById(R.id.jazzyPager);
+        tabHost = (TabHost) findViewById(android.R.id.tabhost);
+        initCustomActionBar();
+    }
 
-	private void initCustomActionBar() {
-		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setDisplayShowTitleEnabled(false);
-		getSupportActionBar().setDisplayUseLogoEnabled(true);
-		getSupportActionBar().setDisplayShowHomeEnabled(false);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-		getSupportActionBar().setHomeAsUpIndicator(
-				new BitmapDrawable(getResources()));
-		View view = getLayoutInflater().inflate(
-				R.layout.layout_custom_actionbar, null);
-		LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT,
-				LayoutParams.MATCH_PARENT, Gravity.LEFT);
-		tv_bar_title = (TextView) view.findViewById(R.id.tv_bar_title);
-		iv_bar_logo = (ImageView) view.findViewById(R.id.iv_bar_logo);
-		getSupportActionBar().setCustomView(view, lp);
-	}
+    private void initCustomActionBar() {
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setHomeAsUpIndicator(
+                new BitmapDrawable(getResources()));
+        View view = getLayoutInflater().inflate(
+                R.layout.layout_custom_actionbar, null);
+        LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT,
+                LayoutParams.MATCH_PARENT, Gravity.LEFT);
+        tv_bar_title = (TextView) view.findViewById(R.id.tv_bar_title);
+        iv_bar_logo = (ImageView) view.findViewById(R.id.iv_bar_logo);
+        getSupportActionBar().setCustomView(view, lp);
+    }
 
-	private void setCustomActionBarTitle(int position){
-		iv_bar_logo.setBackgroundResource(R.drawable.ic_launcher);
-		tv_bar_title.setText(tabName[position]);
-	}
+    private void setCustomActionBarTitle(int position) {
+        iv_bar_logo.setBackgroundResource(R.drawable.ic_launcher);
+        tv_bar_title.setText(tabName[position]);
+    }
 
-	private void initData(){
-		shareManager = new ShareManager(this);
-		tabHost.setup();
-		tabHost.addTab(tabHost.newTabSpec("0").setIndicator(createTab(0)).setContent(android.R.id.tabcontent));
-		tabHost.addTab(tabHost.newTabSpec("1").setIndicator(createTab(1)).setContent(android.R.id.tabcontent));
-		if(shareManager.isCoach()) {
-            tabName = new String[]{"首页","统计","联系人","我的"};
-			tabHost.addTab(tabHost.newTabSpec("2").setIndicator(createTab(2)).setContent(android.R.id.tabcontent));
+    private void initData() {
+        shareManager = new ShareManager(this);
+        tabHost.setup();
+        tabHost.addTab(tabHost.newTabSpec("0").setIndicator(createTab(0)).setContent(android.R.id.tabcontent));
+        tabHost.addTab(tabHost.newTabSpec("1").setIndicator(createTab(1)).setContent(android.R.id.tabcontent));
+        if (shareManager.isCoach()) {
+            tabName = new String[]{"首页", "统计", "联系人", "我的"};
+            tabHost.addTab(tabHost.newTabSpec("2").setIndicator(createTab(2)).setContent(android.R.id.tabcontent));
             tabHost.addTab(tabHost.newTabSpec("3").setIndicator(createTab(3)).setContent(android.R.id.tabcontent));
-		} else {
-            tabName = new String[]{"首页","统计","我的"};
+        } else {
+            tabName = new String[]{"首页", "统计", "我的"};
             tabHost.addTab(tabHost.newTabSpec("2").setIndicator(createTab(2)).setContent(android.R.id.tabcontent));
         }
 
-		// 点击tabHost 来切换不同的消息
-		tabHost.setOnTabChangedListener(new OnTabChangeListener() {
+        // 点击tabHost 来切换不同的消息
+        tabHost.setOnTabChangedListener(new OnTabChangeListener() {
             @Override
             public void onTabChanged(String tabId) {
                 int index = Integer.parseInt(tabId);
@@ -117,133 +118,152 @@ public class MainActivity extends BaseActivity {
                 tabHost.getTabContentView().setVisibility(View.GONE);// 隐藏content
             }
         });
-		tabHost.setCurrentTab(0);
+        tabHost.setCurrentTab(0);
 
-		mfragment1 = new Fragment1();
-		mfragment2 = new Fragment2();
-		mfragmentContacts = new ContactsFragment();
-		mfragment4 = new Fragment4();
+        mfragment1 = new Fragment1();
+        mfragment2 = new Fragment2();
+        mfragmentContacts = new ContactsFragment();
+        mfragment4 = new Fragment4();
 
-		fragmentList = new ArrayList<BaseFragment>();
-		fragmentList.add(mfragment1);
-		fragmentList.add(mfragment2);
-		if(shareManager.isCoach()) {
-			fragmentList.add(mfragmentContacts);
-		}
-		fragmentList.add(mfragment4);
+        fragmentList = new ArrayList<BaseFragment>();
+        fragmentList.add(mfragment1);
+        fragmentList.add(mfragment2);
+        if (shareManager.isCoach()) {
+            fragmentList.add(mfragmentContacts);
+        }
+        fragmentList.add(mfragment4);
 
-		titleList.add("1");
-		titleList.add("2");
+        titleList.add("1");
+        titleList.add("2");
         titleList.add("3");
-		if(shareManager.isCoach()) {
+        if (shareManager.isCoach()) {
             titleList.add("4");
-		}
+        }
 
 
-		initJazzyPager(TransitionEffect.Standard);
-	}
+        initJazzyPager(TransitionEffect.Standard);
+    }
 
-	/**
-	 * 动态创建 TabWidget
-	 * 的Tab项,并设置normalLayout的alpha为1，selectedLayout的alpha为0[显示normal，隐藏selected]
-	 * 
-	 * @param tabIndex
-	 * @return
-	 */
-	private View createTab(int tabIndex) {
-		String tabLabelText = tabName[tabIndex];
-		View tabIndicator = LayoutInflater.from(this).inflate(R.layout.main_tabwidget_layout, null);
-		TextView normalTV = (TextView) tabIndicator.findViewById(R.id.normalTV);
-		TextView selectedTV = (TextView) tabIndicator.findViewById(R.id.selectedTV);
-		normalTV.setText(tabLabelText);
-		selectedTV.setText(tabLabelText);
-		ImageView normalImg = (ImageView) tabIndicator.findViewById(R.id.normalImg);
-		ImageView selectedImg = (ImageView) tabIndicator.findViewById(R.id.selectedImage);
-		switch (tabIndex) {
-		case 0:
-			normalImg.setImageResource(R.drawable.icon_tab_home_default);
-			selectedImg.setImageResource(R.drawable.icon_tab_home_pressed);
-			break;
-		case 1:
-			normalImg.setImageResource(R.drawable.scan_qr);
-			selectedImg.setImageResource(R.drawable.scan_qr_hl);
-			break;
-		case 2:
-			normalImg.setImageResource(R.drawable.scan_street);
-			selectedImg.setImageResource(R.drawable.scan_street_hl);
-			break;
-		case 3:
-			normalImg.setImageResource(R.drawable.scan_word);
-			selectedImg.setImageResource(R.drawable.scan_word_hl);
-			break;
-		}
-		View normalLayout = tabIndicator.findViewById(R.id.normalLayout);
-		normalLayout.setAlpha(1f);// 透明度显示
-		View selectedLayout = tabIndicator.findViewById(R.id.selectedLayout);
-		selectedLayout.setAlpha(0f);// 透明的隐藏
-		Map<String, View> map = new HashMap<String, View>();
-		map.put("normal", normalLayout);
-		map.put("selected", selectedLayout);
-		tabViews.add(map);
-		return tabIndicator;
-	}
+    /**
+     * 动态创建 TabWidget
+     * 的Tab项,并设置normalLayout的alpha为1，selectedLayout的alpha为0[显示normal，隐藏selected]
+     *
+     * @param tabIndex
+     * @return
+     */
+    private View createTab(int tabIndex) {
+        String tabLabelText = tabName[tabIndex];
+        View tabIndicator = LayoutInflater.from(this).inflate(R.layout.main_tabwidget_layout, null);
+        TextView normalTV = (TextView) tabIndicator.findViewById(R.id.normalTV);
+        TextView selectedTV = (TextView) tabIndicator.findViewById(R.id.selectedTV);
+        normalTV.setText(tabLabelText);
+        selectedTV.setText(tabLabelText);
+        ImageView normalImg = (ImageView) tabIndicator.findViewById(R.id.normalImg);
+        ImageView selectedImg = (ImageView) tabIndicator.findViewById(R.id.selectedImage);
+        switch (tabIndex) {
+            case 0:
+                normalImg.setImageResource(R.drawable.icon_tab_home_default);
+                selectedImg.setImageResource(R.drawable.icon_tab_home_pressed);
+                break;
+            case 1:
+                normalImg.setImageResource(R.drawable.scan_qr);
+                selectedImg.setImageResource(R.drawable.scan_qr_hl);
+                break;
+            case 2:
+                normalImg.setImageResource(R.drawable.scan_street);
+                selectedImg.setImageResource(R.drawable.scan_street_hl);
+                break;
+            case 3:
+                normalImg.setImageResource(R.drawable.scan_word);
+                selectedImg.setImageResource(R.drawable.scan_word_hl);
+                break;
+        }
+        View normalLayout = tabIndicator.findViewById(R.id.normalLayout);
+        normalLayout.setAlpha(1f);// 透明度显示
+        View selectedLayout = tabIndicator.findViewById(R.id.selectedLayout);
+        selectedLayout.setAlpha(0f);// 透明的隐藏
+        Map<String, View> map = new HashMap<String, View>();
+        map.put("normal", normalLayout);
+        map.put("selected", selectedLayout);
+        tabViews.add(map);
+        return tabIndicator;
+    }
 
-	/**
-	 * 设置tab状态选中
-	 * 
-	 * @param index
-	 */
-	private void setTabSelectedState(int index, int tabCount) {
-		for (int i = 0; i < tabCount; i++) {
-			if (i == index) {
-				tabViews.get(i).get("normal").setAlpha(0f);
-				tabViews.get(i).get("selected").setAlpha(1f);
-				setCustomActionBarTitle(index);
-			} else {
-				tabViews.get(i).get("normal").setAlpha(1f);
-				tabViews.get(i).get("selected").setAlpha(0f);
-			}
-		}
-		jazzyPager.setCurrentItem(index, false);// false表示 代码切换 pager
-												// 的时候不带scroll动画
-	}
+    /**
+     * 设置tab状态选中
+     *
+     * @param index
+     */
+    private void setTabSelectedState(int index, int tabCount) {
+        for (int i = 0; i < tabCount; i++) {
+            if (i == index) {
+                tabViews.get(i).get("normal").setAlpha(0f);
+                tabViews.get(i).get("selected").setAlpha(1f);
+                setCustomActionBarTitle(index);
+            } else {
+                tabViews.get(i).get("normal").setAlpha(1f);
+                tabViews.get(i).get("selected").setAlpha(0f);
+            }
+        }
+        jazzyPager.setCurrentItem(index, false);// false表示 代码切换pager的时候不带scroll动画
+    }
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-		setTabSelectedState(tabHost.getCurrentTab(), tabName.length);
-	}
+    /**
+     * 选择显示在当前的tab
+     * @param index
+     */
+    public void chooseWhichTabInFront(int index) {
+        if (!isFinishing() && index >= 0 && index <= fragmentList.size()) {
+            setTabSelectedState(index, tabName.length);
+        }
+    }
 
-	private void initJazzyPager(TransitionEffect effect) {
-		tabHost.setCurrentTab(0);
-		jazzyPager.setTransitionEffect(effect);
-		jazzyPager.setAdapter(new MyViewPagerAdapter(getSupportFragmentManager()));
-		jazzyPager.setPageMargin(0);
-		jazzyPager.setFadeEnabled(true);
-		jazzyPager.setSlideCallBack(new SlideCallback() {
-			@Override
-			public void callBack(int position, float positionOffset) {
-				// Log.i("", position+"  "+positionOffset);
-				Map<String, View> map = tabViews.get(position);
-				ViewHelper.setAlpha(map.get("selected"), positionOffset);
-				ViewHelper.setAlpha(map.get("normal"), 1 - positionOffset);
-			}
-		});
-		jazzyPager.setOnPageChangeListener(new OnPageChangeListener() {
-			@Override
-			public void onPageSelected(int position) {
-				tabHost.setCurrentTab(position);
-			}
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setTabSelectedState(tabHost.getCurrentTab(), tabName.length);
+    }
 
-			@Override
-			public void onPageScrolled(int paramInt1, float paramFloat, int paramInt2) {
-			}
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_BACK:
+                moveTaskToBack(true);
+                return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
-			@Override
-			public void onPageScrollStateChanged(int paramInt) {
-			}
-		});
-	}
+    private void initJazzyPager(TransitionEffect effect) {
+        tabHost.setCurrentTab(0);
+        jazzyPager.setTransitionEffect(effect);
+        jazzyPager.setAdapter(new MyViewPagerAdapter(getSupportFragmentManager()));
+        jazzyPager.setPageMargin(0);
+        jazzyPager.setFadeEnabled(true);
+        jazzyPager.setSlideCallBack(new SlideCallback() {
+            @Override
+            public void callBack(int position, float positionOffset) {
+                // Log.i("", position+"  "+positionOffset);
+                Map<String, View> map = tabViews.get(position);
+                ViewHelper.setAlpha(map.get("selected"), positionOffset);
+                ViewHelper.setAlpha(map.get("normal"), 1 - positionOffset);
+            }
+        });
+        jazzyPager.setOnPageChangeListener(new OnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                tabHost.setCurrentTab(position);
+            }
+
+            @Override
+            public void onPageScrolled(int paramInt1, float paramFloat, int paramInt2) {
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int paramInt) {
+            }
+        });
+    }
 
 //	@Override
 //	public boolean onCreateOptionsMenu(Menu menu) {
@@ -265,39 +285,39 @@ public class MainActivity extends BaseActivity {
 //		return true;
 //	}
 
-	@Override
-	public void onConfigurationChanged(Configuration config) {
-		super.onConfigurationChanged(config);
-		
-		// 重新加载数据
-		initJazzyPager(TransitionEffect.Standard);
-	}
+    @Override
+    public void onConfigurationChanged(Configuration config) {
+        super.onConfigurationChanged(config);
 
-	public class MyViewPagerAdapter extends FragmentPagerAdapter {
-		public MyViewPagerAdapter(FragmentManager fm) {
-			super(fm);
-		}
+        // 重新加载数据
+        initJazzyPager(TransitionEffect.Standard);
+    }
 
-		@Override
-		public Object instantiateItem(ViewGroup container, int position) {
-			jazzyPager.setObjectForPosition(fragmentList.get(position), position);
-			return super.instantiateItem(container, position);
-		}
+    public class MyViewPagerAdapter extends FragmentPagerAdapter {
+        public MyViewPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
 
-		@Override
-		public Fragment getItem(int position) {
-			return fragmentList.get(position);
-		}
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            jazzyPager.setObjectForPosition(fragmentList.get(position), position);
+            return super.instantiateItem(container, position);
+        }
 
-		@Override
-		public int getCount() {
-			return fragmentList.size();
-		}
+        @Override
+        public Fragment getItem(int position) {
+            return fragmentList.get(position);
+        }
 
-		@Override
-		public CharSequence getPageTitle(int position) {
-			return titleList.get(position);
-		}
+        @Override
+        public int getCount() {
+            return fragmentList.size();
+        }
 
-	}
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return titleList.get(position);
+        }
+
+    }
 }
