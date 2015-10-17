@@ -13,6 +13,7 @@ import com.example.mall.R;
 import com.example.mall.ui.WebViewActivity;
 import com.example.mall.base.BaseFragment;
 import com.example.mall.model.BannerModel;
+import com.example.mall.ui.main.VisibilityActivity;
 
 import java.util.ArrayList;
 
@@ -47,6 +48,8 @@ public class Fragment1 extends BaseFragment implements BaseSliderView.OnSliderCl
                 Intent intent = new Intent(getActivity(), WebViewActivity.class);
                 intent.putExtra("click_url", "http://www.cnblogs.com/liqw/p/4181327.html");
                 startActivity(intent);
+
+                startActivity(new Intent(getActivity(), VisibilityActivity.class));
             }
         });
     }

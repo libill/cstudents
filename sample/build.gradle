@@ -1,7 +1,15 @@
 import java.util.regex.Pattern
 
 buildscript {
+
     repositories {
+        maven {
+            url "http://132.126.1.70:8888/nexus/content/groups/public"
+        }
+        maven {
+            url "http://maven.oschina.net/content/groups/public/"
+        }
+
         mavenCentral()
     }
     dependencies {
@@ -14,13 +22,13 @@ apply plugin: 'eclipse'
 
 dependencies {
     compile fileTree(dir: 'libs', include: '*.jar')
-    compile project(':android-support-v7-appcompat')
-    compile project(':infinite-indicator')
+    //compile project(':android-support-v7-appcompat')
+    compile project(':infinite-indicator')//在imfinite-indicator使用了fresco，不然v4包异常
     compile project(':android-volley')
     compile project(':pickerview')
     compile project(':alertview')
-
-    //compile 'com.bigkoo:alertview:1.0.1'
+    //compile 'com.facebook.fresco:fresco:0.6.0'
+    compile "com.wefika:flowlayout:0.4.1+"
 }
 
 android {

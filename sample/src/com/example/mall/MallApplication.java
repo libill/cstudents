@@ -8,6 +8,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.Volley;
 import com.example.mall.sharemanager.ShareManager;
+import com.facebook.drawee.backends.pipeline.Fresco;
 
 public class MallApplication extends Application {
 	private String TAG = MallApplication.class.getSimpleName();
@@ -24,6 +25,7 @@ public class MallApplication extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		Fresco.initialize(this);
 		// initialize the singleton
 		mallApplication = this;
 		shareManager = new ShareManager(this);

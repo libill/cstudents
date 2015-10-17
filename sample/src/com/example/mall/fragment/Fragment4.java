@@ -1,6 +1,7 @@
 package com.example.mall.fragment;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import com.example.mall.R;
 import com.example.mall.base.BaseFragment;
 import com.example.mall.ui.my.MyDataUI;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
@@ -21,6 +23,9 @@ public class Fragment4 extends BaseFragment {
 
     @ViewInject(R.id.tv_name)
     private TextView tv_name;
+
+    @ViewInject(R.id.sdv_my_avatar)
+    private SimpleDraweeView sdv_my_avatar;
 
     @Override
     public void initView() {
@@ -35,7 +40,7 @@ public class Fragment4 extends BaseFragment {
     }
 
     private void initData(){
-
+        sdv_my_avatar.setImageURI(Uri.parse("http://www.hinews.cn/pic/0/13/10/65/13106543_789011.jpg"));
     }
 
 

@@ -1,14 +1,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="#00F0FF"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#00F0FF">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/sdv_my_avatar"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        fresco:failureImage="@drawable/ic_launcher"
+        fresco:placeholderImageScaleType="fitCenter"
+        fresco:roundedCornerRadius="10dp"
+        fresco:roundingBorderWidth="1dp" />
 
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="我"
-        />
+        android:text="我" />
 
 </LinearLayout>
