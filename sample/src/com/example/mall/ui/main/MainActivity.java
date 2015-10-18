@@ -1,12 +1,10 @@
 package com.example.mall.ui.main;
 
 import android.content.res.Configuration;
-import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,14 +13,13 @@ import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TextView;
-import android.support.v7.app.ActionBar.LayoutParams;
 
 import com.example.mall.R;
 import com.example.mall.base.BaseActivity;
 import com.example.mall.base.BaseFragment;
+import com.example.mall.fragment.ContactsFragment;
 import com.example.mall.fragment.Fragment1;
 import com.example.mall.fragment.Fragment2;
-import com.example.mall.fragment.ContactsFragment;
 import com.example.mall.fragment.Fragment4;
 import com.example.mall.model.TestModel;
 import com.example.mall.network.Test;
@@ -52,13 +49,12 @@ public class MainActivity extends BaseActivity {
     private ArrayList<BaseFragment> fragmentList;
     ArrayList<String> titleList = new ArrayList<String>();
 
-    private TextView tv_bar_title;
-    private ImageView iv_bar_logo;
-
     @Override
     public void initView() {
         setContentView(R.layout.activity_main);
         ViewUtils.inject(this);
+        setActionBarBack(false, null);
+
         initUI();
         initData();
 
@@ -70,29 +66,6 @@ public class MainActivity extends BaseActivity {
     private void initUI() {
         jazzyPager = (JazzyViewPager) findViewById(R.id.jazzyPager);
         tabHost = (TabHost) findViewById(android.R.id.tabhost);
-        initCustomActionBar();
-    }
-
-    private void initCustomActionBar() {
-        getSupportActionBar().setDisplayShowCustomEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setDisplayUseLogoEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(false);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        getSupportActionBar().setHomeAsUpIndicator(
-                new BitmapDrawable(getResources()));
-        View view = getLayoutInflater().inflate(
-                R.layout.layout_custom_actionbar, null);
-        LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT,
-                LayoutParams.MATCH_PARENT, Gravity.LEFT);
-        tv_bar_title = (TextView) view.findViewById(R.id.tv_bar_title);
-        iv_bar_logo = (ImageView) view.findViewById(R.id.iv_bar_logo);
-        getSupportActionBar().setCustomView(view, lp);
-    }
-
-    private void setCustomActionBarTitle(int position) {
-        iv_bar_logo.setBackgroundResource(R.drawable.ic_launcher);
-        tv_bar_title.setText(tabName[position]);
     }
 
     private void initData() {
@@ -199,7 +172,7 @@ public class MainActivity extends BaseActivity {
             if (i == index) {
                 tabViews.get(i).get("normal").setAlpha(0f);
                 tabViews.get(i).get("selected").setAlpha(1f);
-                setCustomActionBarTitle(index);
+                setActionBarTitle(tabName[index]);
             } else {
                 tabViews.get(i).get("normal").setAlpha(1f);
                 tabViews.get(i).get("selected").setAlpha(0f);

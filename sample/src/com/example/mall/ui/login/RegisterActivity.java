@@ -39,6 +39,7 @@ public class RegisterActivity extends BaseActivity {
     }
 
     private void initTitle() {
+        setActionBarBack(true, null);
         setActionBarTitle(R.string.register);
     }
 

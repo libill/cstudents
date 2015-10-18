@@ -55,7 +55,7 @@ public class WebViewActivity extends BaseActivity implements OnClickListener {
     public void initView() {
         setContentView(R.layout.activity_webview);
         ViewUtils.inject(this);
-        setActionBarBack(true);
+        setActionBarBack(true, null);
         initUI();
         initData();
     }

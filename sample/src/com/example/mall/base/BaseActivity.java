@@ -1,6 +1,7 @@
 package com.example.mall.base;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.BitmapDrawable;
@@ -13,9 +14,11 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewConfiguration;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -39,6 +42,9 @@ public abstract class BaseActivity extends ActionBarActivity {
     protected Boolean isHideActionBar;
 
     protected boolean isShowActionBarBack = false;
+    private TextView tv_bar_title;
+    private ImageView iv_bar_logo;
+    private TextView tv_bar_more;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,15 +60,26 @@ public abstract class BaseActivity extends ActionBarActivity {
         }
 
         forceShowOverflowMenu();
-        // 显示自定义的view
-        getSupportActionBar().setDisplayShowCustomEnabled(true);
-        // 设置actionbar的logo
-        getSupportActionBar().setLogo(new BitmapDrawable(getResources()));
-        // 设置返回drawable
-        getSupportActionBar().setHomeAsUpIndicator(
-                R.drawable.action_bar_back);
-        setActionBarBack(true);
+        initCustomActionBar();
         setActionBarBackground();
+    }
+
+    private void initCustomActionBar() {
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setHomeAsUpIndicator(
+                new BitmapDrawable(getResources()));
+        View view = getLayoutInflater().inflate(
+                R.layout.layout_custom_actionbar, null);
+        ActionBar.LayoutParams lp = new ActionBar.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT,
+                ActionBar.LayoutParams.MATCH_PARENT, Gravity.LEFT);
+        tv_bar_title = (TextView) view.findViewById(R.id.tv_bar_title);
+        iv_bar_logo = (ImageView) view.findViewById(R.id.iv_bar_logo);
+        tv_bar_more = (TextView) view.findViewById(R.id.tv_bar_more);
+        getSupportActionBar().setCustomView(view, lp);
     }
 
     private boolean detectHideActionBar() {
@@ -99,14 +116,29 @@ public abstract class BaseActivity extends ActionBarActivity {
         }
     }
 
-    protected void setActionBarBack(boolean isShowActionBarBack) {
+    protected void setActionBarBack(boolean isShowActionBarBack, OnClickListener l) {
         this.isShowActionBarBack = isShowActionBarBack;
-        // 页面返回设置
-        getSupportActionBar().setDisplayHomeAsUpEnabled(isShowActionBarBack);
-        // 页面主按钮【如 登录，主页】设置
-        getSupportActionBar().setHomeButtonEnabled(isShowActionBarBack);
-        // 隐藏home icon
-        getSupportActionBar().setDisplayShowHomeEnabled(false);
+        if(isShowActionBarBack){
+            if(null != l){
+                iv_bar_logo.setOnClickListener(l);
+            } else {
+                iv_bar_logo.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                    }
+                });
+            }
+        }
+        iv_bar_logo.setVisibility(isShowActionBarBack?View.VISIBLE:View.GONE);
+        tv_bar_more.setVisibility(View.INVISIBLE);
+    }
+
+    protected void setActionBarBackAndMore(boolean isShowActionBarBack, OnClickListener clickListener) {
+        this.isShowActionBarBack = isShowActionBarBack;
+        iv_bar_logo.setVisibility(View.VISIBLE);
+        tv_bar_more.setVisibility(View.VISIBLE);
+        tv_bar_more.setOnClickListener(clickListener);
     }
 
     @Override
@@ -243,11 +275,11 @@ public abstract class BaseActivity extends ActionBarActivity {
     public abstract void initView();
 
     public void setActionBarTitle(int id) {
-        getSupportActionBar().setTitle(id);
+        tv_bar_title.setText(id);
     }
 
     public void setActionBarTitle(String titleName) {
-        getSupportActionBar().setTitle(titleName);
+        tv_bar_title.setText(titleName);
     }
 
     public void hideActionBar() {

@@ -27,6 +27,7 @@ public class SelectRoleUI extends BaseActivity {
     }
 
     private void initTitle(){
+        setActionBarBack(true, null);
         setActionBarTitle(R.string.select_role);
     }
 

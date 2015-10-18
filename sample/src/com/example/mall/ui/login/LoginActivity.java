@@ -31,7 +31,7 @@ public class LoginActivity extends BaseActivity {
         ViewUtils.inject(this);
 
         setActionBarTitle(R.string.login);
-        setActionBarBack(false);
+        setActionBarBack(false, null);
         initUI();
         initData();
     }
@@ -62,11 +62,9 @@ public class LoginActivity extends BaseActivity {
         switch (v.getId()) {
             case R.id.bt_login:
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                finish();
                 break;
             case R.id.bt_register:
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-                finish();
                 break;
             case R.id.tv_forget_password:
                 startActivity(new Intent(LoginActivity.this, ForgetPasswordUI.class));
