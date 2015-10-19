@@ -11,6 +11,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
@@ -96,6 +97,11 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initData() {
+        //透明状态栏
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        //透明导航栏
+        //getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+
         shareManager = new ShareManager(this);
         tabHost.setup();
         tabHost.addTab(tabHost.newTabSpec("0").setIndicator(createTab(0)).setContent(android.R.id.tabcontent));
@@ -119,7 +125,7 @@ public class MainActivity extends BaseActivity {
             }
         });
         tabHost.setCurrentTab(0);
-
+        tabHost.getTabWidget().setDividerDrawable(null);
         mfragment1 = new Fragment1();
         mfragment2 = new Fragment2();
         mfragmentContacts = new ContactsFragment();

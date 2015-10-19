@@ -25,26 +25,11 @@ android {
     compileSdkVersion 22
     buildToolsVersion '22.0.1'
 
+    enforceUniquePackageName=false
+
     sourceSets {
         main {
-//            manifest {
-//                srcFile 'AndroidManifest.xml'
-//            }
-            java {
-                srcDir 'src'
-            }
-            res {
-                srcDir 'res'
-            }
-            assets {
-                srcDir 'assets'
-            }
-            resources {
-                srcDir 'src'
-            }
-            aidl {
-                srcDir 'src'
-            }
+            jniLibs.srcDirs = ['libs']
         }
     }
 
