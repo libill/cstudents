@@ -7,6 +7,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.Volley;
+import com.example.mall.db.DBManager;
 import com.example.mall.sharemanager.ShareManager;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
@@ -28,6 +29,7 @@ public class MallApplication extends Application {
 		Fresco.initialize(this);
 		// initialize the singleton
 		mallApplication = this;
+		DBManager.init(this);
 		shareManager = new ShareManager(this);
 	}
 

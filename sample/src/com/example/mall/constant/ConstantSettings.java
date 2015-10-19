@@ -11,4 +11,6 @@ package com.example.mall.constant;
 public class ConstantSettings {
     private static final String TAG = ConstantSettings.class.getSimpleName();
     public final static String FILE_PATH = "sample";
+    public final static String dbName = "jiaolian.db";
+    public final static int dbVersion = 1;
 }

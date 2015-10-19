@@ -72,7 +72,7 @@ public class TFavorite extends TBase<Favorite> {
 	
 	/**
 	 * 判断链接是否已存在
-	 * @param obj
+	 * @param url
 	 * @return
 	 */
 	public boolean isExitByUrl(String url) {
