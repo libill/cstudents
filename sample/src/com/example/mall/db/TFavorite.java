@@ -50,7 +50,7 @@ public class TFavorite extends TBase<Favorite> {
 		cursor.close();
 		return favorite;
 	}
-	
+
 	/**
 	 * 判断该路径是否已经存在
 	 * @param obj
@@ -69,10 +69,10 @@ public class TFavorite extends TBase<Favorite> {
 		}
 		return result;
 	}
-	
+
 	/**
 	 * 判断链接是否已存在
-	 * @param obj
+	 * @param url
 	 * @return
 	 */
 	public boolean isExitByUrl(String url) {
