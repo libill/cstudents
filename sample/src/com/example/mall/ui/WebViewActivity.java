@@ -34,11 +34,6 @@ public class WebViewActivity extends BaseActivity implements OnClickListener {
     private String TAG = "WebViewActivity";
     private WebView mWebView;
     private static ProgressBar loadProgressBar;
-    private RadioButton radio_button0;
-    private RadioButton radio_button1;
-    private RadioButton radio_button2;
-    private RadioButton radio_button3;
-    private RadioButton radio_button4;
 
     DBManager dbManager = null;
 
@@ -47,9 +42,6 @@ public class WebViewActivity extends BaseActivity implements OnClickListener {
     }
 
     private boolean isShowBottom = false;
-
-    @ViewInject(R.id.ll_bottom)
-    private LinearLayout ll_bottom;
 
     @Override
     public void initView() {
@@ -63,16 +55,6 @@ public class WebViewActivity extends BaseActivity implements OnClickListener {
     private void initUI() {
         mWebView = (WebView) findViewById(R.id.webview);
         loadProgressBar = (ProgressBar) findViewById(R.id.pb);
-        radio_button0 = (RadioButton) findViewById(R.id.radio_button0);
-        radio_button1 = (RadioButton) findViewById(R.id.radio_button1);
-        radio_button2 = (RadioButton) findViewById(R.id.radio_button2);
-        radio_button3 = (RadioButton) findViewById(R.id.radio_button3);
-        radio_button4 = (RadioButton) findViewById(R.id.radio_button4);
-        radio_button0.setOnClickListener(this);
-        radio_button1.setOnClickListener(this);
-        radio_button2.setOnClickListener(this);
-        radio_button3.setOnClickListener(this);
-        radio_button4.setOnClickListener(this);
         WebSettings settings = mWebView.getSettings();
         setWebViewSettings(settings);
 
@@ -100,7 +82,7 @@ public class WebViewActivity extends BaseActivity implements OnClickListener {
     }
 
     private void initData() {
-        dbManager = DBManager.getInstance(this);
+        dbManager = DBManager.getDBManager();
         // webview 加载页面
         Bundle bundle = getIntent().getExtras();
         String click_url = null;
@@ -112,15 +94,10 @@ public class WebViewActivity extends BaseActivity implements OnClickListener {
         if (click_url == null || click_url.equalsIgnoreCase("")) {
             click_url = "http://www.cnblogs.com/liqw";
         }
-        if(!isShowBottom){
-            ll_bottom.setVisibility(View.GONE);
-        }
         // mWebView.loadUrl("file:///android_asset/html/index.html");
         //mWebView.loadUrl("file:///android_asset/html/protocol/index.html");
         mWebView.loadUrl(click_url);
 
-        setRadioButtonGoBack();
-        setRadioButtonGoForward();
     }
 
     private class SampleWebViewClient extends WebViewClient {
@@ -165,9 +142,6 @@ public class WebViewActivity extends BaseActivity implements OnClickListener {
         public void onReceivedTitle(WebView view, String title) {
             super.onReceivedTitle(view, title);
             setWebViewTitle(title);
-            setRadioButtonGoBack();
-            setRadioButtonGoForward();
-            setRadioButtonFavorite(view.getUrl());
         }
 
     }
@@ -193,75 +167,10 @@ public class WebViewActivity extends BaseActivity implements OnClickListener {
         }
     }
 
-    private void setRadioButtonGoForward() {
-        if (!mWebView.canGoForward()) {
-            Drawable drawable = getResources().getDrawable(R.drawable.ic_action_next_item_block);
-            radio_button1.setCompoundDrawablesRelativeWithIntrinsicBounds(null, drawable, null, null);
-        } else {
-            Drawable drawable = getResources().getDrawable(R.drawable.selector_ic_action_next_item);
-            radio_button1.setCompoundDrawablesRelativeWithIntrinsicBounds(null, drawable, null, null);
-        }
-    }
-
-    private void setRadioButtonGoBack() {
-        if (!mWebView.canGoBack()) {
-            Drawable drawable = getResources().getDrawable(R.drawable.ic_action_previous_item_block);
-            radio_button0.setCompoundDrawablesRelativeWithIntrinsicBounds(null, drawable, null, null);
-        } else {
-            Drawable drawable = getResources().getDrawable(R.drawable.selector_ic_action_previous_item);
-            radio_button0.setCompoundDrawablesRelativeWithIntrinsicBounds(null, drawable, null, null);
-        }
-    }
-
-    private void setRadioButtonFavorite(String url) {
-        if (dbManager.TFavorite().isExitByUrl(url)) {
-            Drawable drawable = getResources().getDrawable(R.drawable.ic_action_favorite_already);
-            radio_button2.setCompoundDrawablesRelativeWithIntrinsicBounds(null, drawable, null, null);
-        } else {
-            Drawable drawable = getResources().getDrawable(R.drawable.selector_ic_action_favorite);
-            radio_button2.setCompoundDrawablesRelativeWithIntrinsicBounds(null, drawable, null, null);
-        }
-    }
-
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.radio_button0:
-                if (mWebView.canGoBack()) {
-                    mWebView.goBack();
-                }
-                setRadioButtonGoBack();
-                break;
-            case R.id.radio_button1:
-                if (mWebView.canGoForward()) {
-                    mWebView.goForward();
-                }
-                setRadioButtonGoForward();
-                break;
-            case R.id.radio_button2:
-                Favorite favorite = new Favorite();
-                favorite.setId(FormatUtils.getUUID());
-                favorite.setTitle(mWebView.getTitle());
-                favorite.setUrl(mWebView.getUrl());
-                favorite.setCreateDate(System.currentTimeMillis() + "");
-
-                if (dbManager.TFavorite().isExitByUrl(favorite.getUrl())) {
-                    Toast.makeText(getApplicationContext(), "链接已收藏", Toast.LENGTH_SHORT).show();
-                } else {
-                    boolean result = dbManager.TFavorite().addByUrl(favorite);
-                    if (result) {
-                        Toast.makeText(getApplicationContext(), "链接已收藏成功", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "链接收藏失败", Toast.LENGTH_SHORT).show();
-                    }
-                }
-                setRadioButtonFavorite(favorite.getUrl());
-                break;
-            case R.id.radio_button3:
-                Toast.makeText(getApplicationContext(), "链接已复制到剪贴板", Toast.LENGTH_SHORT).show();
-                ClipboardManager clip = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                clip.setText(mWebView.getUrl());
                 break;
             default:
                 break;
