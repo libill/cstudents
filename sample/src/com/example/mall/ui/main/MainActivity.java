@@ -70,11 +70,6 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initData() {
-        //透明状态栏
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        //透明导航栏
-        //getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-
         shareManager = new ShareManager(this);
         tabHost.setup();
         tabHost.addTab(tabHost.newTabSpec("0").setIndicator(createTab(0)).setContent(android.R.id.tabcontent));

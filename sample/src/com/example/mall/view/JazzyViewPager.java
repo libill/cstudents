@@ -21,7 +21,7 @@ import com.example.mall.R;
 import com.nineoldandroids.view.ViewHelper;
 
 public class JazzyViewPager extends ViewPager {
-	public static final String TAG = "JazzyViewPager";
+	public static final String TAG = JazzyViewPager.class.getSimpleName();
 	private boolean mEnabled = true;
 	private boolean mFadeEnabled = false;
 	private boolean mOutlineEnabled = false;
